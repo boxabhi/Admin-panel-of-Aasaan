@@ -15,6 +15,7 @@ var connection = mysql.createConnection({
   app.use(bodyParser.urlencoded({ 
     extended: false
   }));
+  
   app.use(bodyParser.json());
   app.use(bodyParser.text({ type: 'text/html' }))
   app.use(bodyParser.text({ type: 'text/xml' }))
@@ -105,18 +106,15 @@ app.get('/classes', function(req,res){
 })
 
 app.get('/students', function(req,res){
-  var sql = 'SELECT s_id,name FROM students';
+  var sql = 'SELECT * FROM students';
   connection.query(sql, function(err,results,fields){
     if(err){
-      console.log(err)
       res.send({"status":400,"failed":"error ocurred"});
     }else{
       res.send(results)
     }
   })
 })
-
-
 
 
 
