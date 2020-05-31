@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Cart from '../views/Cart.vue'
 import Home from '../views/Home.vue'
+import Trainer from '../views/Trainer/Trainer.vue'
 
 Vue.use(VueRouter)
 
@@ -9,6 +11,16 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path : '/cart',
+    name : 'Cart',
+    component: Cart
+  },
+  {
+    path : '/become-trainer',
+    name: Trainer,
+    component: Trainer
   },
   {
     path: '/about',
