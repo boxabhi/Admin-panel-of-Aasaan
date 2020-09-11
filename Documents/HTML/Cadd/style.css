@@ -1,0 +1,103 @@
+*{
+ 
+}
+
+.logo{
+    height : 120px;
+}
+
+.social{
+    background : #000;
+    color : #fff;
+    border-radius : 5px;
+    text-align :center;
+    margin:  6px;
+    width : 30px;
+    height: 35px;
+    padding-top:  4px;
+}
+/* .world__class__background{
+    background-image: url('./img/sand.svg');
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 50px;
+} */
+.world__class{
+    font-weight: normal;
+    font-size : 34px;
+}
+
+.contact__text{
+    font-size:13px;
+    margin: 4px;
+}
+
+span{
+    color : #ed1b24;
+    font-weight: bold;
+}
+
+.vl {
+    border-left: 1px solid black;
+    height: 60px;
+    margin-top: 30px;
+  }
+
+.why__left__column{
+    background : #f1f1f3;
+}
+
+input{
+    border: none !important;
+    border-radius: 0px !important;
+}
+.btn-primary{
+    background :#fff !important;
+    color: #ed1b24 !important;
+    border-radius: 0px !important;
+    border : #fff;
+    padding-bottom: 8px;
+}
+.btn-primary:hover{
+    color :#fff !important;
+    background: #ed1b24 !important;
+}
+
+.why__right__column{
+    background: #ed1b24;
+    color : #fff;
+}
+
+.text-big{
+    font-weight: bolder;
+    font-size : 50px
+}
+.course__cadd_left{
+    background : #ed1b24;
+}
+.course__cadd{
+    background :#efefef;
+}
+
+h3{
+    font-size : 30px;
+    color : #ed1b24;
+    font-weight: bolder;
+}
+
+hr{
+    color : #000;
+    background : #000;
+     border : 2px solid ;
+     width: 150px;
+     margin-right: 1000px;
+     
+}
+
+.footer {
+    background : #fff;
+}
+.footer__image{
+    height: 250px;
+
+}
