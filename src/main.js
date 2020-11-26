@@ -14,7 +14,7 @@ import '@/assets/scss/main.scss'
 Vue.prototype.$apiUrl = 'http://127.0.0.1:8000'
 Vue.prototype.$axios = axios
 
-window.url = 'http://127.0.0.1:8000'
+window.url = 'https://aasaan-app.com/'
 
 import VueAlertify from 'vue-alertify';
 import vuetify from './plugins/vuetify';
