@@ -42,7 +42,7 @@
                                             <v-btn color="primary"  class="mr-2">
                                                 View
                                             </v-btn>
-                                            <button class="btn btn-main-gradient" >
+                                            <button class="btn btn-main-gradient" v-on:click="deleteQuestion(question.id)" >
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </button>
                                         </td>
@@ -62,7 +62,7 @@ import DashboardLayout from '@/components/Layouts/DashboardLayout'
  import {
     mapGetters
   } from 'vuex';
-
+import axios from 'axios'
 export default {
     name: 'Categories',
     components: {
@@ -77,7 +77,24 @@ export default {
        this.$store.dispatch('fetchQuestions')
     },
     methods: {
-       
+      deleteQuestion(id) {
+            this.$swal.fire({
+                    title: '<p>Do you really want to delete?</p>',
+                    showDenyButton: true,
+                    confirmButtonText: `Yes`,
+                    denyButtonText: `No`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var data = {'id': id}
+                        console.log(data)
+                        axios.delete(`${window.url}/questions`, {data: {id: id}})
+                        .then(res => { console.log(res) })
+                        this.$swal.fire({ icon: 'error', title: 'Deleted',text: 'Super category deleted',})
+                        this.$store.dispatch('fetchSuper')
+
+                    }
+                })
+      } 
     },
      computed: mapGetters(['allQuestions' ]),
 }

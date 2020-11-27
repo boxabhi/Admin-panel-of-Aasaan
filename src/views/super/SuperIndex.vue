@@ -33,11 +33,16 @@
                                         </td>
                                         <td> {{super_category.default_view_count}}</td>
                                         <td>
+                                            <router-link :to="`/super/show/${super_category.id}`">
+                                            <a href="">
                                             <v-btn color="primary" class="mr-2">
                                                 View
                                             </v-btn>
-                                            <button class="btn btn-main-gradient"><i class="fa fa-trash-o"
-                                                    aria-hidden="true"></i></button>
+                                            </a>
+                                            </router-link>
+                                            <button class="btn btn-main-gradient"
+                                                v-on:click="deleteSuperCategory(super_category.id)">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -55,7 +60,7 @@
     import {
         mapGetters
     } from 'vuex';
-
+    import axios from 'axios'
     export default {
         name: 'SuperIndex',
         components: {
@@ -70,7 +75,24 @@
             this.$store.dispatch('fetchSuper')
         },
         methods: {
+            deleteSuperCategory(id) {
+                this.$swal.fire({
+                    title: '<p>Do you really want to delete?</p>',
+                    showDenyButton: true,
+                    confirmButtonText: `Yes`,
+                    denyButtonText: `No`,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var data = {'id': id}
+                        console.log(data)
+                        axios.delete(`${window.url}/super`, {data: {id: id}})
+                        .then(res => { console.log(res) })
+                        this.$swal.fire({ icon: 'error', title: 'Deleted',text: 'Super category deleted',})
+                        this.$store.dispatch('fetchSuper')
 
+                    }
+                })
+            }
         },
         computed: mapGetters(['allSuper']),
     }

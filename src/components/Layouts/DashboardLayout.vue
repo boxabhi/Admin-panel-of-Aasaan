@@ -12,21 +12,26 @@
                 <v-list>
                     <v-list-item v-for="item in items" :key="item.title" link>
 
-                        <v-list-item-icon>
+                       <v-list-item-icon>
                             <v-icon>{{ item.icon }}</v-icon>
                         </v-list-item-icon>
                         <router-link :to="`/${item.link}`">
+                           <a href="">
+                                
                             <v-list-item-content>
                                 <v-list-item-title class="text-white" style="color:#fff !important">{{ item.title }}
                                 </v-list-item-title>
                             </v-list-item-content>
+                           </a>
                         </router-link>
                     </v-list-item>
                 </v-list>
 
     <div class="container ml-5">
         <router-link to="/">
-        <v-btn color="green" class="ml-5">Logout</v-btn>
+        <a href="">
+        <v-btn color="green" class="ml-5"  @click="signout">Logout</v-btn>
+        </a>
         </router-link>
     </div>
             </v-navigation-drawer>
@@ -83,6 +88,11 @@
                         icon: ' mdi-clipboard-outline',
                         link: 'category'
                     },
+                      {
+                        title: 'Notifications',
+                        icon: 'mdi-bell',
+                        link: 'notifications'
+                    },
                     {
                         title: 'Admins',
                         icon: 'mdi-account-settings',
@@ -93,6 +103,8 @@
                         icon: 'mdi-key',
                         link: 'password'
                     },
+                   
+                   
                     
                    
 
@@ -101,9 +113,9 @@
         },
         methods: {
             signout() {
-                localStorage.removeItem('authtoken')
                 localStorage.removeItem('admin')
-                this.$router.push('/admin/login');
+              
+                this.$router.push('/');
             }
         }
     }
