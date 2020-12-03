@@ -2,7 +2,6 @@
     <dashboard-layout>
         <div slot="main-content">
             <h2 class="dash-title">Add Category</h2>
-
             <section class="recent">
                 <div class="">
                     <div class="activity-card pad-1">
@@ -11,7 +10,7 @@
 
                                 <label for="">Category name in english</label>
                                 <div>
-                                    <input type="text" v-model="name" class="form-control"
+                                    <input type="text" v-model="category.name.english" class="form-control"
                                         placeholder="Write category in english ">
                                 </div>
 
@@ -19,22 +18,23 @@
                             <div class="form-group col-md-6">
                                 <label for="">Category name in hindi</label>
 
-                                <input type="text" v-model="name" class="form-control "
+                                <input type="text" v-model="category.name.hindi" class="form-control "
                                     placeholder="Write category in hindi ">
 
                             </div>
                         </div>
 
+
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Default View Count</label>
-                            <input type="text" class="form-control" value="5" id="formGroupExampleInput"
-                                placeholder="Default view count">
+                            <label for="formGroupExampleInput">Image url</label>
+                            <input type="text" class="form-control" v-model="category.icon_url"
+                                id="formGroupExampleInput" placeholder="Image URL">
                         </div>
 
-                        <v-file-input accept="image/*" label="Upload Catgeory image"></v-file-input>
-
-                        <v-select v-model="value" :items="allCategoriesName" attach chips label="Select Category"
-                            multiple></v-select>
+                       
+                        <v-autocomplete :items="allQuestionsIds"   chips label="Select Category"
+                            multiple v-model="category.questions" deletable-chips  >
+                        </v-autocomplete>
 
                         <div class="form-group">
                             <button @click="addCategory" class="btn btn-main">Submit</button>
@@ -53,7 +53,7 @@
     import {
         mapGetters
     } from 'vuex';
-
+    import axios from 'axios'
     export default {
         name: 'AddCategory',
         components: {
@@ -62,38 +62,46 @@
         data() {
             return {
                 name: '',
-                categories: [],
-                items: ['foo', 'bar', 'fizz', 'buzz'],
+                questions: [],
+                category: {
+                    name: {
+                        english: '',
+                        hindi: ''
+                    },
+                    icon_url: '',
+                    questions: []
+                }
             }
         },
         methods: {
             addCategory() {
-                if (!this.name) {
-                    return this.$alertify.error('Incomplete form data')
-                }
+                var payload = []
+                payload.push(this.category)
+                console.log(payload)
+                axios.post(`${window.url}/categories`, payload)
+                    .then(res => {
+                        this.$swal.fire({
+                            icon: 'success',
+                            title: 'Success...',
+                            text: res.data.message,
+                        })
 
-                this.$axios.post(`${this.$apiUrl}/categories/add`, {
-                        name: this.name
-                    }, {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.authtoken}`
+                        this.category = {
+                            name: {
+                                english: '',
+                                hindi: ''
+                            },
+                            icon_url: '',
+                            questions: []
                         }
                     })
-                    .then(() => {
-                        this.$router.push('/admin/categories')
-                    })
-                    .catch(error => {
-                        if (error.response.data.message) {
-                            return this.$alertify.error(error.response.data.message)
-                        }
-                        this.$alertify.error(Object.values(error.response.data)[0][0])
-                    })
+
             }
         },
         mounted() {
-            this.$store.dispatch('fetchCategories')
+            this.$store.dispatch('fetchQuestions')
         },
-        computed: mapGetters(['allCategories', 'allCategoriesName']),
+        computed: mapGetters(['allQuestions', 'allQuestionsIds']),
 
     }
 </script>

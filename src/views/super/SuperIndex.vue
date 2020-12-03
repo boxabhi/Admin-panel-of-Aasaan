@@ -19,6 +19,8 @@
                                 <thead>
                                     <tr>
                                         <th>S.no</th>
+                                        <th>Question Id</th>
+
                                         <th>Question</th>
                                         <th>Default view count</th>
 
@@ -28,6 +30,7 @@
                                 <tbody>
                                     <tr v-for="(super_category, index) in allSuper" :key="index">
                                         <td class="text-left">#{{index + 1}}</td>
+                                        <th>{{super_category.id}}</th>
                                         <td>
                                             <p>{{super_category.name.english}} | {{super_category.name.hindi}}</p>
                                         </td>

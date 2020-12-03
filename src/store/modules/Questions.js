@@ -9,6 +9,10 @@ const state = {
 const getters  ={
      allQuestions : function() {
         return state.questions;
+    },
+    allQuestionsIds : function() {
+        var ids = state.questions.map(question => question.id)
+        return ids
     }
 }
 
@@ -18,6 +22,8 @@ const actions = {
         const response =  await axios.get(`${url}/questions`)
         commit('setQuestions',response.data.data)
     },
+
+
 
 }
 

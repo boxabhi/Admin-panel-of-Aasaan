@@ -18,6 +18,7 @@
     "vue-router": "^3.2.0",
     "vue-sweetalert2": "^4.1.1",
     "vuetify": "^2.2.11",
+    "vuetify-upload-button": "^2.0.2",
     "vuex": "^3.5.1"
   },
   "devDependencies": {

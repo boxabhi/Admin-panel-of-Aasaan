@@ -6,6 +6,8 @@ import Super from './modules/Super.js'
 import Categories from './modules/Categories.js'
 import Admin from './modules/Admin.js'
 import Global from './modules/Global.js'
+import Users from './modules/Users.js'
+
 
 
 
@@ -20,6 +22,7 @@ export default new Vuex.Store({
         Super,
         Categories,
         Admin,
-        Global
+        Global,
+        Users
     }
 })

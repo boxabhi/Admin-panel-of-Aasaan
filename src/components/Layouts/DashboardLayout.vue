@@ -98,11 +98,26 @@
                         icon: 'mdi-account-settings',
                         link: 'admin/create'
                     },
+                    {
+                        title: 'Users',
+                        icon: 'mdi-account',
+                        link: 'users'
+                    },
                       {
                         title: 'Password',
                         icon: 'mdi-key',
                         link: 'password'
                     },
+                    {
+                        title: 'Image Gallery',
+                        icon: 'mdi-key',
+                        link: 'upload-image'
+                    },
+                    {
+                        title: 'Requests',
+                        icon: 'mdi-chili-mild',
+                        link: 'requests'
+                    }
                    
                    
                     

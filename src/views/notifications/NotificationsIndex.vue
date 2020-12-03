@@ -1,7 +1,9 @@
 <template>
     <dashboard-layout>
         <div slot="main-content">
+        
             <h2 class="dash-title">Send notifications to users</h2>
+            
             <section class="recent">
                 <form v-on:submit.prevent="handleSubmit">
                     <div class="">
@@ -10,7 +12,7 @@
                                 <div class="form-group col-md-6">
                                     <label for="">Subheader for notifications</label>
                                     <div>
-                                        <input type="text" required v-model="password.old_password" class="form-control"
+                                        <input type="text" required v-model="data.subheader" class="form-control"
                                             placeholder="Subheader for notifications">
                                     </div>
                                 </div>
@@ -18,7 +20,7 @@
                                     <label for="">Title for notifications</label>
 
                                     <div class="">
-                                        <input type="text" required v-model="password.new_password" class="form-control"
+                                        <input type="text" required v-model="data.title" class="form-control"
                                             placeholder="Title for notifications">
                                     </div>
                                 </div>
@@ -27,7 +29,7 @@
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <label for="">Description</label>
-                                    <textarea class="form-control" height="100"></textarea>
+                                    <textarea class="form-control"  v-model="data.description" height="100"></textarea>
                                 </div>
                             </div>
 
@@ -36,70 +38,24 @@
                                     <label for="">Image Url </label>
 
                                     <div class="">
-                                        <input type="text" required v-model="password.confirm_password"
+                                        <input type="text" required v-model="data.image_url"
                                             class="form-control" placeholder="Image URL">
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="">Add tags </label>
-                                    <v-combobox hide-selected multiple persistent-hint small-chips>
+                                    <v-combobox hide-selected multiple persistent-hint small-chips v-model="data.tag">
                                     </v-combobox>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <v-select v-model="selectedFruits" :items="fruits" label="Favorite Fruits" chips
-                                        multiple>
-                                        <template v-slot:prepend-item>
-                                            <v-list-item ripple @click="toggle">
-                                                <v-list-item-action>
-                                                    <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">
-                                                        {{ icon }}
-                                                    </v-icon>
-                                                </v-list-item-action>
-                                                <v-list-item-content>
-                                                    <v-list-item-title>
-                                                        Select All
-                                                    </v-list-item-title>
-                                                </v-list-item-content>
-                                            </v-list-item>
-                                            <v-divider class="mt-2"></v-divider>
-                                        </template>
-                                        <template v-slot:append-item>
-                                            <v-divider class="mb-2"></v-divider>
-                                            <v-list-item disabled>
-                                                <v-list-item-avatar color="grey lighten-3">
-                                                    <v-icon>
-                                                        mdi-food-apple
-                                                    </v-icon>
-                                                </v-list-item-avatar>
+                                <div class="form-group col-md-12">
+                                    <label for="">Mobile for notifications</label>
 
-                                                <v-list-item-content v-if="likesAllFruit">
-                                                    <v-list-item-title>
-                                                        Holy smokes, someone call the fruit police!
-                                                    </v-list-item-title>
-                                                </v-list-item-content>
-
-                                                <v-list-item-content v-else-if="likesSomeFruit">
-                                                    <v-list-item-title>
-                                                        Fruit Count
-                                                    </v-list-item-title>
-                                                    <v-list-item-subtitle>
-                                                        {{ selectedFruits.length }}
-                                                    </v-list-item-subtitle>
-                                                </v-list-item-content>
-
-                                                <v-list-item-content v-else>
-                                                    <v-list-item-title>
-                                                        How could you not like fruit?
-                                                    </v-list-item-title>
-                                                    <v-list-item-subtitle>
-                                                        Go ahead, make a selection above!
-                                                    </v-list-item-subtitle>
-                                                </v-list-item-content>
-                                            </v-list-item>
-                                        </template>
-                                    </v-select>
+                                    <div class="">
+                                        <input type="text" required v-model="mobiles" class="form-control"
+                                            placeholder="Enter mobiles by , separated ">
+                                    </div>
                                 </div>
                             </div>
 
@@ -119,7 +75,11 @@
 </template>
 
 <script>
+import axios from 'axios'
     import DashboardLayout from '@/components/Layouts/DashboardLayout'
+     import {
+    mapGetters
+  } from 'vuex';
 
     export default {
         name: 'Password',
@@ -128,56 +88,68 @@
         },
         data() {
             return {
-                password: {
-                    old_password: '',
-                    new_password: '',
-                    confirm_password: '',
+                data: {
+                    subheader: '',
+                    title: '',
+                    description: '',
+                    image_url : '',
+                    tag : '',
+                    mobiles : '',
                 },
                 model: ['Vuetify'],
                 search: '',
-                fruits: [
-                    'Apples',
-                    'Apricots',
-                    'Avocado',
-                    'Bananas',
-                    'Blueberries',
-                    'Blackberries'
-                ],
-                selectedFruits: [],
+                mobiles: [],
+                selectedMobiles: [],
+                
             }
         },
         methods: {
             handleSubmit() {
-                if (this.password.new_password != this.password.confirm_password) {
-                    this.$swal('Password not matched');
-                }
+                var user_mobiles = this.mobiles.split(',')
+                var payload = {}
+                 payload.user_mobiles = user_mobiles
+                 payload.data = this.data
+                 axios.post(`${window.url}/send-user-notifications`,payload)
+                 .then(res =>{ 
+                     console.log(res)
+                      this.$swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: 'Notification send',
+                        })
+                    this.data = {subheader: '',title: '',description: '',image_url : '',tag : ''}
+                    this.selectedMobiles = []
+                 })
+
+
             },
             toggle() {
                 this.$nextTick(() => {
-                    if (this.likesAllFruit) {
-                        this.selectedFruits = []
+                    if (this.likesAllMobile) {
+                        this.selectedMobiles = []
                     } else {
-                        this.selectedFruits = this.fruits.slice()
+                        this.selectedMobiles = this.mobiles.slice()
                     }
                 })
             },
         },
         mounted() {
-
+                this.$store.dispatch('fetchMobiles')
         },
         watch: {
 
         },
         computed: {
-            likesAllFruit() {
-                return this.selectedFruits.length === this.fruits.length
+            ...mapGetters(['getMobileNumbers']),
+            likesAllMobile() {
+                return this.selectedMobiles.length === this.mobiles.length
             },
-            likesSomeFruit() {
-                return this.selectedFruits.length > 0 && !this.likesAllFruit
+            likesSomeMobile() {
+                return this.selectedMobiles.length > 0 && !this.likesAllMobiles
             },
             icon() {
-                if (this.likesAllFruit) return 'mdi-close-box'
-                if (this.likesSomeFruit) return 'mdi-minus-box'
+                if (this.likesAllMobile) return 'mdi-close-box'
+                if (this.likesSomeMobile) return 'mdi-minus-box'
                 return 'mdi-checkbox-blank-outline'
             },
         },

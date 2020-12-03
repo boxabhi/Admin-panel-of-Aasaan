@@ -6,12 +6,22 @@ import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
 import QuestionIndex from '../views/question/QuestionIndex.vue'
 import QuestionCreate from '../views/question/QuestionCreate.vue'
+import QuestionShow from '../views/question/QuestionShow.vue'
+
 import SuperIndex from '../views/super/SuperIndex.vue'
 import SuperCreate from '../views/super/SuperCreate.vue'
 import SuperShow from '../views/super/SuperShow.vue'
 import CategoryIndex from '../views/category/CategoryIndex.vue'
 import CategoryCreate from '../views/category/CategoryCreate.vue'
+import CategoryShow from '../views/category/CategoryShow.vue'
 import Password from '../views/admin/Password.vue'
+import CreateAdmin from '../views/admin/CreateAdmin.vue'
+import UsersIndex from '../views/users/UsersIndex.vue'
+
+import ImageUpload from '../views/admin/ImageUpload.vue'
+import RequestIndex from '../views/requests/RequestIndex.vue'
+
+
 import NotificationsIndex from '../views/notifications/NotificationsIndex.vue'
 
 
@@ -65,6 +75,11 @@ const routes = [{
     component: QuestionCreate
   },
   {
+    path: '/question/show/:id',
+    name: 'QuestionShow',
+    component: QuestionShow
+  },
+  {
     path: '/super',
     name: 'SuperIndex',
     component: SuperIndex
@@ -90,6 +105,11 @@ const routes = [{
     component: CategoryCreate
   },
   {
+    path: '/category/show/:id',
+    name: 'CategoryShow',
+    component: CategoryShow
+  },
+  {
     path: '/password',
     name: 'Password',
     component: Password
@@ -98,6 +118,26 @@ const routes = [{
     path: '/notifications',
     name: 'NotificationsIndex',
     component: NotificationsIndex
+  },
+  {
+    path : '/admin/create',
+    name: 'AdminCreate',
+    component: CreateAdmin
+  },
+  {
+    path : '/users',
+    name: 'UserIndex',
+    component: UsersIndex
+  },
+  {
+    path : '/upload-image',
+    name: 'UploadImage',
+    component: ImageUpload
+  },
+  {
+    path : '/requests',
+    name: 'Requests',
+    component: RequestIndex
   },
   {
     path: '/about',

@@ -1,32 +1,32 @@
 <template>
     <dashboard-layout>
         <div slot="main-content">
-            <h2 class="dash-title">Change Admin password</h2>
+            <h2 class="dash-title">Create new Admin for Aasaan</h2>
             <section class="recent">
                 <form v-on:submit.prevent="handleSubmit">
                     <div class="">
                         <div class="activity-card pad-1">
                             <div class="form-group">
-                                <label for="">Your old Password</label>
+                                <label for="">Username for admin</label>
                                 <div>
-                                    <input type="password" required v-model="password.old_password" class="form-control"
-                                        placeholder="Your old Password ">
+                                    <input type="password" required v-model="admin.username" class="form-control"
+                                        placeholder="Username for new admin">
                                 </div>
                             </div>
                             <div class="form-group mt-5">
-                                <label for="">Your new Password</label>
+                                <label for="">Admin  Password</label>
 
                                 <div class="">
-                                    <input type="password" required v-model="password.new_password" class="form-control"
-                                        placeholder="Your new Password ">
+                                    <input type="password" required v-model="admin.new_password" class="form-control"
+                                        placeholder="Password ">
                                 </div>
                             </div>
                             <div class="form-group mt-5">
-                                <label for="">Confirm new Password</label>
+                                <label for="">Confirm  Password</label>
 
                                 <div class="">
-                                    <input type="password" required v-model="password.confirm_password"
-                                        class="form-control" placeholder="Confirm new Password">
+                                    <input type="password" required v-model="admin.confirm_password"
+                                        class="form-control" placeholder="Confirm Password">
                                 </div>
                             </div>
 
@@ -53,18 +53,17 @@
         },
         data() {
             return {
-                password: {
-                    old_password: '',
+                admin: {
                     new_password: '',
                     confirm_password: '',
-                    username: 'admin',
+                    username: '',
                 }
 
             }
         },
         methods: {
            async handleSubmit() {
-               if(this.password.new_password != this.password.confirm_password){
+               if(this.admin.new_password != this.admin.confirm_password){
                    this.$swal.fire({
                             icon: 'error',
                             title: 'Password',
@@ -74,8 +73,7 @@
                }
                 var url= window.url
                 var token = JSON.parse(localStorage.getItem('admin'))
-                console.log(token)
-                axios.post(`${url}/api/admin/change_password`,this.password , {
+                axios.post(`${url}/api/admin`,this.admin , {
                     headers: {
                         'Authorization': `Bearer ${token.access} `
                     },
@@ -87,14 +85,14 @@
                             title: 'Success...',
                             text: res.data.message
                         })
-                    this.password = {old_password: '',new_password: '',confirm_password: '',username: 'admin',}
+                    this.admin = {new_password: '',confirm_password: '',username: '',}
                     }else{
                          this.$swal.fire({
                             icon: 'error',
                             title: 'Oops...',
                             text: res.data.message
                         })
-                         this.password = {old_password: '',new_password: '',confirm_password: '',username: 'admin',}
+                         this.password = {new_password: '',confirm_password: '',username: '',}
                     }
                 })
             }

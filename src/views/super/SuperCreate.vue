@@ -27,8 +27,26 @@
                                     id="formGroupExampleInput" placeholder="Default view count">
                             </div>
 
-                            <v-select v-model="categories" :items="allCategoriesName" attach chips @input="add"
-                                label="Select Category" multiple></v-select>
+                            <v-autocomplete v-model="categories" deletable-chips  :items="allCategoriesName"  chips 
+                                label="Select Category" multiple>
+
+
+
+                                
+                                
+                            </v-autocomplete>
+
+
+                            <!-- <v-select v-model="categories" :items="allCategoriesName" attach close
+                                close-icon="mdi-delete" chips label="Select Category" multiple>
+
+                                <template slot="selection" slot-scope="data">
+                                    <v-chip close :key="JSON.stringify(data.items)" :input-value="data.selected">
+
+                                    </v-chip>
+                                </template>
+                            </v-select> -->
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-main">Submit</button>
                             </div>
@@ -69,8 +87,8 @@
         methods: {
             addCategory() {
                 var payload = this.data
-                var categories = this.categories.map((category) =>{
-                    var cat = JSON.parse(category) 
+                var categories = this.categories.map((category) => {
+                    var cat = JSON.parse(category)
                     return cat.id
                 })
                 payload.categories = categories
@@ -80,13 +98,20 @@
                 axios.post(`${window.url}/super`, result)
                     .then(res => {
                         console.log(res)
-                         this.$swal.fire({
+                        this.$swal.fire({
                             icon: 'success',
                             title: 'Success',
                             text: 'Super Category Added',
-                })})
-            this.data = {name: {english: '',hindi: ''},default_view_count: 5}
-            this.categories = []
+                        })
+                    })
+                this.data = {
+                    name: {
+                        english: '',
+                        hindi: ''
+                    },
+                    default_view_count: 5
+                }
+                this.categories = []
             }
         },
         mounted() {
