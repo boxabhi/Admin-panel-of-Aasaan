@@ -46,10 +46,10 @@
 
 
                                         <td>
-                            
-                                            <button class="btn btn-main-gradient"
-                                                v-on:click="deleteSuperCategory(super_category.id)">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                            <router-link :to="`user/show/${user.id}`">
+                                        <v-btn color="red" small dark>View</v-btn>
+                                            </router-link>
+                                            
                                         </td>
                                     </tr>
                                 </tbody>

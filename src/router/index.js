@@ -17,9 +17,13 @@ import CategoryShow from '../views/category/CategoryShow.vue'
 import Password from '../views/admin/Password.vue'
 import CreateAdmin from '../views/admin/CreateAdmin.vue'
 import UsersIndex from '../views/users/UsersIndex.vue'
+import UsersShow from '../views/users/UsersShow.vue'
+
 
 import ImageUpload from '../views/admin/ImageUpload.vue'
 import RequestIndex from '../views/requests/RequestIndex.vue'
+import RequestShow from '../views/requests/RequestShow.vue'
+
 
 
 import NotificationsIndex from '../views/notifications/NotificationsIndex.vue'
@@ -130,6 +134,11 @@ const routes = [{
     component: UsersIndex
   },
   {
+    path : '/user/show/:id',
+    name: 'UsersShow',
+    component: UsersShow
+  },
+  {
     path : '/upload-image',
     name: 'UploadImage',
     component: ImageUpload
@@ -138,6 +147,11 @@ const routes = [{
     path : '/requests',
     name: 'Requests',
     component: RequestIndex
+  },
+  {
+    path: '/requests/show/:id',
+    name: 'RequestShow',
+    component: RequestShow,
   },
   {
     path: '/about',

@@ -30,7 +30,7 @@
                             </div>
 
 
-                            <v-select v-model="categories" :items="categories" selected attach chips 
+                            <v-select v-model="categories" deletable-chips  :items="categories" selected attach chips 
                                 label="Select Category" multiple></v-select>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-main">Update</button>

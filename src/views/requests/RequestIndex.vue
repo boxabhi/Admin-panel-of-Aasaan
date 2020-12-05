@@ -46,7 +46,11 @@
                                         <td> {{request.complaints_count}}</td>
 
 
-
+                                        <td>
+                                            <router-link :to="`/requests/show/${request.id}`">
+                                            <v-btn color="primary" small dark>View</v-btn>
+                                            </router-link>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
