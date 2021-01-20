@@ -11,10 +11,10 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import '@/assets/scss/main.scss'
 
-Vue.prototype.$apiUrl = 'https://aasaan-app.com'
+Vue.prototype.$apiUrl = 'http://127.0.0.1:8000'
 Vue.prototype.$axios = axios
 
-window.url = 'https://aasaan-app.com'
+window.url = 'http://127.0.0.1:8000'
 
 import VueAlertify from 'vue-alertify';
 import vuetify from './plugins/vuetify';

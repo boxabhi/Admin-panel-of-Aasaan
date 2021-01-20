@@ -141,6 +141,7 @@
 
         var result = []
         result.push(payload)
+        console.log(result)
         axios.post(`${window.url}/questions`, result)
           .then(res => {
             this.$swal.fire({

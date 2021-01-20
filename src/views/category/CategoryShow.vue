@@ -31,8 +31,10 @@
                                 id="formGroupExampleInput" placeholder="Image URL">
                         </div>
 
-                        <v-select :items="category.questions" v-model="category.questions" attach chips
-                            label="Select Category" multiple></v-select>
+                        <v-text-field ref="search" v-model="question" chips full-width hide-details label="Search"
+                            single-line></v-text-field>
+                        <!-- <v-select :items="category.questions" v-model="category.questions" attach chips
+                            label="Select Category" multiple></v-select> -->
 
                         <div class="form-group">
                             <button @click="updateCategory" class="btn btn-main">Update</button>
@@ -69,33 +71,56 @@
                     },
                     icon_url: '',
                     questions: []
-                }
+                },
+                question: []
             }
         },
         methods: {
+            make_question_seprated(question) {
+                var q = '';
+                for(var i = 0; i < question.length;i++){
+                    if(i < question.length -1)
+                    q   = q +question[i] + ' ,'
+                    else
+                    q   = q +question[i]
+                }
+                    
+                this.question = q;
+            },
             async getCategory() {
                 await axios.get(`${window.url}/categories?id=${this.$route.params.id}`)
                     .then(res => {
                         this.category = res.data
-
+                        this.make_question_seprated(res.data.questions)
+                       
                     })
             },
             updateCategory() {
-                var payload = []
-                payload.push(this.category)
-                axios.post(`${window.url}/categories`, this.category)
+                var payload = this.category
+                
+                var questions = []
+                questions =this.question.split(',')
+
+                payload.questions = questions
+
+            console.log(payload)
+                axios.put(`${window.url}/categories`, payload)
                     .then(res => {
                         this.$swal.fire({
                             icon: 'success',
                             title: 'Success...',
                             text: res.data.message,
                         })
-                        this.category = {name: { english: '',hindi: ''},
-                        icon_url: '',
-                        questions: []
+                        this.category = {
+                            name: {
+                                english: '',
+                                hindi: ''
+                            },
+                            icon_url: '',
+                            questions: []
                         }
                     })
-            
+
             }
         },
         mounted() {
