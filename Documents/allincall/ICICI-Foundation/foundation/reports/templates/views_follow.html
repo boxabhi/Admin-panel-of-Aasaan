@@ -1,0 +1,95 @@
+{% extends "console/base.html" %}
+{% block content %}
+
+<main class="content">
+
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong>Follow Up</strong> Reports</h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+
+              <a href="{% url 'followups' %}" class="btn btn-info mb-4"><i class="fas fa-arrow-left"></i></a>
+              
+
+              <div class="text-right mb-4 d-flex">
+                <div class="form-group">
+                  <select class="from-control" id="selected_option">
+                    <option value="1">Send SMS</option>
+                    <option value="2">Refresh</option>
+
+
+                  </select>
+                </div>
+                <div class="pl-3">
+                <button class="btn btn-info" onclick="check(3)">Send </button>
+              </div>
+              </div>
+
+              <table  id="table_followups" class="display">
+                <thead class="thead-white">
+                  <tr>
+                    <th scope="col">CheckBox</th>
+
+                    <th scope="col">S. NO</th>
+                    <th scope="col">Trainee ID</th>
+                    <th scope="col">Centre Name</th>
+                    <th scope="col">Faculty Name</th>
+                    <th scope="col">Contact Number</th>
+
+                    <th scope="col">Email</th>
+
+                    <th scope="col">SMS Status</th>
+                    <th scope="col">Email Status</th>
+                    <th scope="col">Pk</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+
+
+                  {% for followp in followps %}
+                  <tr>
+                    <td></td>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{% if followp.trainee_id %} {{followp.trainee_id}} {% else %} - {% endif %} </td>
+                    <td>{% if followp.centre_name %} {{followp.centre_name}} {% else %} - {% endif %} </td>
+
+                    <td>{% if followp.faculty_name %} {{followp.faculty_name}} {% else %} - {% endif %} </td>
+                    <td>{% if followp.contact_no %} {{followp.contact_no}} {% else %} - {% endif %} </td>
+
+                    <td>
+                      {% if followp.email %} {{followp.email}} {% else %} - {% endif %}
+
+                    </td>
+                    <td>{{followp.sms_status}}</td>
+                    <td>{{followp.email_status}}</td>
+                    <td>{{followp.pk}}</td>
+
+
+
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+{% endblock %}

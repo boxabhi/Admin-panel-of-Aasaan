@@ -1,0 +1,166 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Manage Trainee</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+
+                            <div>
+                                <form method="get">
+                                    <div class="row mb-4">
+                                        <div class="col-md-3">
+                                            <label>Select ISA code</label>
+                                            <select name="isa_id" class="form-control">
+                                                {% for isa in isa_id_list %}
+                                                <option value="{{isa.isa_code}}">{{isa.ISAName}} - {{isa.isa_code}} </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>Select Start date</label>
+                                            <input type="date" class="form-control" name="from_batch_start_date">
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label>Select End date</label>
+                                            <input type="date" class="form-control" name="from_batch_end_date">
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="mt-4">
+                                                <button type="submit" class="btn btn-primary">Search</button>
+                                                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#assignFollowups">
+                                                    Assign followups
+                                                </button>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+
+                            </div>
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">
+                                            <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                        </th>
+                                        <th scope="col">S. NO</th>
+                                        <th scope="col">TraineeId </th>
+                                        <th scope="col">TraineeName</th>
+                                        <th scope="col">Application Id</th>
+
+                                        <th scope="col">Batch Id</th>
+
+                                        <th scope="col">ISACourseId</th>
+                                        <th scope="col">Batch Start Date</th>
+                                        <th scope="col">Batch End Date</th>
+                                        <th>Is Imported</th>
+
+                                   
+                                    </tr>
+                                </thead>
+
+                                {% for data in datas %}
+                                <tbody id="show_batches">
+                                    <tr>
+                                        <td>
+                                      
+                                            <input type="checkbox" id="checkboxes" 
+                                            data-trainee_id="{{data.TraineeId}}" 
+                                            data-trainee_name="{{data.TraineeName}}"
+                                            data-batch_id="{{data.BatchId}}"
+                                            data-batch_start_date= "{{data.BatchStartDate}}"
+                                            data-batch_end_date= "{{data.BatchEndDate}}"
+                                            data-applicant_id= "{{data.ApplicantId}}"
+                                            >
+
+
+                                        </td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{data.TraineeId}}</td>
+                                        <td>{{data.TraineeName}}</td>
+                                        <td>{{data.ApplicantId}}</td>
+
+                                        <td>{{data.BatchId}}</td>
+                                        <td>{{data.ISACourseId}}</td>
+                                        <td>{{data.BatchStartDate}}</td>
+                                        <td>{{data.BatchEndDate}}</td>
+                                        <td>
+                                            {%  if data.is_stored %}
+                                            <i class="far fa-check-square text-success"></i>
+                                            {% else %}
+                                            <i class="fas fa-times text-danger"></i>
+                                            {% endif %}
+                                        </td>
+                                      
+
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="assignFollowups" tabindex="-1" aria-labelledby="assignFollowupsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Manage Trainee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3">
+        
+            <div class="row">
+                <div class="col-md-12 mt-2">
+                    <label>Follow up title</label>
+                    <input type="text"  id="follow_up_title" class="form-control" placeholder="Follow up title">
+                </div>
+                <div class="col-md-12 mt-3">
+                    <label>Follow up deadline</label>
+                    <input type="date" id="follow_up_deadline" class="form-control" placeholder="">
+                </div>
+
+                <div class="col-md-12 mt-3">    
+                    <label>Select user</label>
+                    <select class="form-control" id="assign_to_user">
+                        <option >Choose</option>
+                        {% for user in users %}
+                        <option value="{{user.id}}">{{user.email}}</option>
+
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="assignFollowups()" class="btn btn-warning">Assign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

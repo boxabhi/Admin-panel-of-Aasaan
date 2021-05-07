@@ -1,0 +1,97 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong>GAL - Global Address List</strong></h3>
+      </div>
+      
+            <div class="row">
+                <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+                    <div class="card flex-fill mt-4 pt-4">
+                        
+                        <form class="row container mb-4">
+                            <div class="col-md-4 form-group">
+                                <label>Enter Name/Emp Id</label>
+                                <input class="form-control" name="search_query" placeholder="Search">
+                            </div>
+                            <div class="col-md-4 form-group" style="margin-top: 5px;">
+                                <button class="btn btn-primary mt-4" type="submit"  >Search</button>
+                            </div>
+                        </form>
+
+                        <table class="table table-striped mt-3" id="table_id">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Employee ID</th>
+                                    <th scope="col">Employee Name</th>
+                                    <th scope="col">Designation</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Location</th>
+                                    <th scope="col">State</th>
+                                    <th scope="col">Zone</th>
+                                    <th scope="col">Corporate Number</th>
+                                    <th scope="col">Email Id</th>
+                                    <th scope="col">Manager Name</th>
+                                    <th scope="col">Reporting manager designation</th>
+                                    <th scope="col">Reporting manager Email Id</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in gal_datas.details %}
+                                <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <td>{{data.EmpId}}</td>
+                                    <td>{{data.EmpName}}</td>
+                                    
+                                    <td>{{data.RoleName}} {# Designation #}</td>
+                                    <td>{{data.DepartmentName}}</td>
+                                    <td>{{data.LocationName}}</td>
+                                    <td>{{data.StateName}}</td>
+                                    <td>{{data.ZoneName}}</td>
+                                    <td>{{data.PhoneNo}}  {# Corporate No. #} </td>
+                                    <td>{{data.Email}}</td>
+                                    <td>{{data.ReportingEmpName}}</td>
+                                    <td>{{data.RoleName}}  {# Designation #}</td>
+                                    <td>{{data.Email}}</td>
+                                    <td>
+                                        <a href="" class="btn btn-info">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+
+<style>
+    #table_id_wrapper{
+        margin:10px;
+    }
+</style>
+
+
+
+{% endblock %}

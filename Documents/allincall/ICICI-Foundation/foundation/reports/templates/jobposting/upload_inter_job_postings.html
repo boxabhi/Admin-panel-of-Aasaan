@@ -1,0 +1,228 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong> Upload Internal Job Postings </strong></h3>
+      </div>
+      
+            <div class="row">
+                <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header mb-3">
+
+                        
+                        </div>
+
+                        <div class="text-right">
+                          
+                          <button type="button" class="btn btn-danger m-3" data-bs-toggle="modal" data-bs-target="#CreateJob">
+                            Create Job postings
+                          </button>
+                            <button type="button" class="btn btn-primary m-3" data-bs-toggle="modal" data-bs-target="#ImpactUpload">
+                                Upload Job postings
+                              </button>
+                              
+                        </div>
+                   
+
+                        <table class="table table-striped mt-3 p-3" id="myTable" >
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col"> Position</th>
+                                    <th scope="col">Location </th>
+                                    <td scope="col">Is Active</td>
+
+                                    <th scope="col">Job Description</th>
+                                    <th scope="col">Created at</th>
+                                    <th scope="col">Action</th>
+
+
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for data in job_postings %}
+                                <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <td>
+                                        {{data.position}}
+                                    </td>
+                                    <td>
+                                        {{data.location}}
+                                    </td>
+                                    <td>
+                                        
+                                        <div class="form-check form-switch text-center">
+                                            <input class="form-check-input" onchange="toggleJobPosting('{{data.id}}')" {% if data.is_active %} checked {% endif %} type="checkbox" id="flexSwitchCheckDefault">
+                                           
+                                          </div>
+                                    </td>
+                                    <td style="width: 30%;"> {{data.job_description|truncatechars:30|safe}}</td>
+                                   
+                                    <td>{{data.created_at}}</td>
+                                    <td>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#show-{{data.id}}">
+  View
+</button>
+                                      <a href="{% url 'upload_job_posting' data.id %}" class="btn btn-info btn-sm">Update</a>
+                                      
+                                    
+                                      <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModale-{{data.id}}">
+                                        <i class="fas fa-trash-alt"></i>
+                                      </button>
+
+
+
+                                      <!-- Modal -->
+<div class="modal fade" id="show-{{data.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Job Description | {{data.position}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       {{data.job_description|safe}}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+                                      
+                                      
+                                      <div class="modal fade" id="exampleModale-{{data.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Confirm delete</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+                                              Are your sure?
+                                            </div>
+                                            <div class="modal-footer">
+                                      <a href="{%  url 'delete_job_posting' data.id %}" class="btn btn-primary">Delete</a>
+                                              
+                                              </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    
+                                    
+                                    
+                                    </td>
+                                    
+                                 
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+<style>
+    #table_id_wrapper{
+        margin:10px;
+    }
+</style>
+
+
+<!-- Modal -->
+<div class="modal fade" id="CreateJob" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Job Posting</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post"  >
+
+          {%csrf_token %}
+          <div class="row">
+          <div class="col-md-12">
+            <label>Enter Job Position </label>
+            <input class="form-control" name="job_position"  id="job_position" type="text">
+          </div>
+
+          <div class="col-md-12">
+            <label>Enter Job Location </label>
+           
+            <input class="form-control" name="job_location"  id="job_location" type="text">
+          </div>
+
+          <div class="col-md-12">
+            {{form.media}}
+            {{form.as_p}}
+          </div>
+
+          </div>
+
+        <button type="submit"  class="btn btn-primary">Submit</button>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit"  class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="ImpactUpload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Upload Job Posting Excel</label>
+                <input class="form-control" type="file" id="fileupload">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button"  onclick="uploadJobPostingExcel()" class="btn btn-primary">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+{% endblock %}

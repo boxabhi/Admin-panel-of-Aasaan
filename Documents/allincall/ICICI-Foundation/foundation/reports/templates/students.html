@@ -1,0 +1,180 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong> Trainee list for Batch Id - {{batch_id}}</strong></h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+
+              <a href="{% url 'enrollments' %}" class="btn btn-info mb-4"><i class="fas fa-arrow-left"></i></a>
+
+              <div class="text-right mb-4">
+                <button class="btn btn-danger" onclick="importTrainees()">Import Trainees</button>
+
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#IssueModal">
+                  Issue Certificate
+                </button>
+                
+<!-- 
+                <button class="btn btn-info" onclick="issueCertificates()"></button>
+               -->
+              </div>
+
+              <table class="table" id="table_enrollments" class="display">
+                <thead class="thead-white">
+                  <tr>
+                    <th scope="col">
+                      <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                    </th>
+                    <th scope="col">S. NO</th>
+                    <th scope="col">Trainee id </th>
+                    <th scope="col">Applicantion Id</th>
+                    <th scope="col">Trainee Name</th>
+                    <th scope="col">Batch Id</th>
+                    <th scope="col">ISA course Id</th>
+                    <th scope="col">Issue </th>
+                    <th scope="col">Is Imported</th>
+
+                    <th scope="col">status </th>
+
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {% for data in datas %}
+
+                  <tr>
+                    <td>
+                      <input type="checkbox" id="checkboxes" 
+                      data-trainee_id="{{data.TraineeId}}" 
+                      data-application_id="{{data.ApplicationId}}"
+                      data-trainee_name="{{data.TraineeName}}"
+                      data-batch_id="{{data.BatchId}}"
+                      >
+                    </td>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.TraineeId}}</td>
+                    <td>{{data.ApplicationId}}</td>
+                    <td>{{data.TraineeName}}</td>
+                    <td>{{data.BatchId}}</td>
+                    <td>{{data.ISACourseId}}</td>
+                    <td>N/A</td>
+
+                    <td class="text-center"> 
+                      {%  if data.is_stored %}
+                      <i class="far fa-check-square text-success"></i>
+                      {% else %}
+                      <i class="fas fa-times text-danger"></i>
+                      {% endif %}
+                    </td>
+                    <td>
+                      
+                      {% if data.is_certificate_issued %}
+                      <button class="btn btn-success btn-sm" style="background:green !important">Issued</button>
+                      {% else %}
+                      <button class="btn btn-success btn-sm">Pending</button>
+
+                      {% endif %}
+                    </td>
+
+                  </tr>
+
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div class="modal fade" id="IssueModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Issue Certificates</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-md-12 form-group">
+          <label>Select template</label>
+          <select onchange="addCertificateLink()" class="form-control" id="template_id">
+            <option value="">Choose</option>
+            {% for obj in certificate_template_objs %}
+            <option value="{{obj.pk}}">{{obj.template_name}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <a href="#" target="_blank" style="display: none;" id="view_certificate">View Certificate</a>
+        
+        <div class="col-md-12 form-group mt-3">
+          <label>Enter Course otherwise default course will be used</label>
+          <input class="form-control" id="custom_course" placeholder="Custom Course">
+        </div>
+
+        
+          <div class="col-md-12 form-group mt-3">
+            <label>Enter ISA Id</label>
+            <input class="form-control" id="isa_id" placeholder="Enter ISA Id">
+          </div>
+
+          <div class="col-md-12 form-group mt-3">
+            <label>Enter Start Date</label>
+            <input class="form-control" id="start_date" type="date">
+          </div>
+
+          
+          <div class="col-md-12 form-group mt-3">
+            <label>Enter End Date</label>
+            <input class="form-control" id="end_date" type="date">
+          </div>
+
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="issueCertificates()">Issue Certificates</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script>
+
+function addCertificateLink(){
+  var template_id = document.getElementById('template_id').value
+  var view_certificate = document.getElementById('view_certificate')
+  if(template_id == ""){
+    view_certificate.href = '#'
+    view_certificate.style.display = 'none'
+  }else{
+    view_certificate.style.display = ''
+
+    view_certificate.href=  `/reports/show-certificate-template/${template_id}/`
+  }
+
+
+
+}
+
+</script>
+
+
+
+{% endblock %}

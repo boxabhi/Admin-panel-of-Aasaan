@@ -1,0 +1,119 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+    <div class="container-fluid p-0">
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Add organization</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+                       <div class="row">
+                           <div class="col-md-6 form-group">
+                               <label>Name</label>
+
+                               <input class="form-control" id="name" placeholder="Enter name">
+
+                           </div>
+                           <div class="col-md-5 form-group">
+                               <label>Type</label>
+                               <select class="form-control" id="organization_type">
+                                   <option value="">Choose</option>
+                                   <option value="School">School</option>
+                                   <option value="College">College</option>
+                                   <option value="Private Company">Private Company</option>
+                                   <option value="SHG">SHG</option>
+                                   <option value="Government Organization">Government Organization</option>
+                                   <option value="Professional Bodies">Professional Bodies</option>
+                                   <option value="Associations">Associations</option>
+                                   <option value="Housing Societies">Housing Societies</option>
+                                   <option value="Others"> Others</option>
+
+                               </select>
+                           </div>
+                       </div>
+
+                       <div class="row mt-3">
+                           <div class="col-md-6">
+                               <label>Address</label>
+                               <input class="form-control" placeholder="Address" id="address">
+                           </div>
+                           <div class="col-md-6">
+                               <label>State</label>
+                               <input class="form-control" placeholder="State" id="state">
+                           </div>
+                       </div>
+
+                       <div class="row mt-3">
+                           <div class="col-md-6">
+                               <label>District</label>
+                               <input class="form-control" placeholder="District" id="district">
+
+                           </div>
+                           <div class="col-md-6">
+                            <label>City/Town</label>
+                            <input class="form-control" placeholder="City/Town" id="city">
+
+                        </div>
+                       </div>
+
+
+                       <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label>Pincode </label>
+                            <input class="form-control" placeholder="Pincode" id="pincode">
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Contact Person </label>
+                            <input class="form-control" placeholder="Contact Person" id="contact_person">
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label>Designation</label>
+                            <input class="form-control" placeholder="Designation" id="designation">
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Mobile</label>
+                            <input class="form-control" placeholder="Mobile" id="mobile">
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label>Email</label>
+                            <input class="form-control" placeholder="Email" id="email">
+
+                        </div>
+                    </div>
+
+
+                    <button class="btn btn-primary mt-3" onclick="createOrganization()">Submit</button>
+                          
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+{% endblock %}

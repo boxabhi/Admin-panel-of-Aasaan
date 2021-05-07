@@ -1,0 +1,110 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Scheduled Interviews - </strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+
+                  
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-white">
+                                    <tr>
+                                        <th scope="col">
+                                            <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                        </th>
+                                        <th scope="col">S. No</th>
+                                        <th scope="col">ISA Academy </th>
+                                        <th scope="col">Reason</th>
+                                        <th scope="col">Created At</th>
+
+                                      
+                                   
+                                    </tr>
+                                </thead>
+
+                                {% for data in datas %}
+                                <tbody id="show_batches">
+                                    <tr>
+                                        <td>
+                                      
+                                            <input type="checkbox" id="checkboxes" 
+                                         
+                                            >
+
+
+                                        </td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{data.isa_academy}}</td>
+                                        <td>{{data.reason}}</td>
+                                        <td>{{data.created_at}}</td>
+
+                                       
+                                        
+
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="assignFollowups" tabindex="-1" aria-labelledby="assignFollowupsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Manage Trainee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3">
+        
+            <div class="row">
+                <div class="col-md-12 mt-2">
+                    <label>Follow up title</label>
+                    <input type="text"  id="follow_up_title" class="form-control" placeholder="Follow up title">
+                </div>
+                <div class="col-md-12 mt-3">
+                    <label>Follow up deadline</label>
+                    <input type="date" id="follow_up_deadline" class="form-control" placeholder="">
+                </div>
+
+                <div class="col-md-12 mt-3">    
+                    <label>Select user</label>
+                    <select class="form-control" id="assign_to_user">
+                        <option >Choose</option>
+                        {% for user in users %}
+                        <option value="{{user.id}}">{{user.email}}</option>
+
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="assignFollowups()" class="btn btn-warning">Assign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

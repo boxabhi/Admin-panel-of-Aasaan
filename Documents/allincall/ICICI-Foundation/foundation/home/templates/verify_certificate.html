@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block start %}
+<!-- Container element -->
+<div class="parallax">
+</div>
+
+<div class="container mt-5 pt-5">
+    <div class="mx-auto">
+        <form>
+
+        
+        <div class="col-md-6">
+            <label>Enter ceriticate id</label>
+            <input name="certificate_id" class="form-control" placeholder="Enter certificate number">
+        </div>
+        <div class="col-md-6 mt-2">
+            <button class="btn btn-info">Search</button>
+        </div>
+    </form>
+    </div>
+    {% if  is_searched and not is_found %}
+    <p class="mt-2">Certificate not found</p>
+    {% endif %}
+
+
+    {%  if certificate_obj %}
+    <div class="card p-5 mt-4 col-md-5">
+
+  
+    <p>
+        Trainer name :  {{certificate_obj.trainee_id.trainee_name}}
+    </p>
+    <p>
+        Batch name :  {{certificate_obj.trainee_id.batch_id}}
+    </p>
+    
+    <p>
+        Issue Date : {{certificate_obj.created_at}}
+    </p>
+    <p>
+        Valid : Yes
+    </p>
+    <p>
+        <img class="img-fluid" style="height:100px" src="https://images.vexels.com/media/users/3/157931/isolated/preview/604a0cadf94914c7ee6c6e552e9b4487-curved-check-mark-circle-icon-by-vexels.png">
+    </p>
+    <a  target="_blank" href="/media/certificates/{{certificate_obj.file_path}}">View</a>
+</div>
+
+
+   
+    {% endif %}
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

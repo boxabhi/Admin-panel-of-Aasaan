@@ -1,0 +1,164 @@
+{% extends 'console/base.html' %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong>Manage</strong> Payments</h3>
+            </div>
+           
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        
+
+                            <div class="mx-auto col-md-12 mt-5 p-2" id="enrollments"  >
+
+                                <form class="mb-5 ml-4">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input class="form-control" placeholder="Enter Emp id" name="emp_id">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="submit" class="btn btn-info">Find</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                    <table class="mt-4 table table-striped" id="scroll_table" class="display">
+                                        <thead>
+                                          <tr>
+                                 <th>           ClaimNo     </th>
+                                 <th>           IFIG_NO   </th>
+                                 <th>           Inward   </th>
+                                 <th>           Month   </th>
+                                 <th>           Employee Code   </th>
+                                 <th>           Inwarded By   </th>
+                                 <th>           Vendor Code   </th>
+                                 <th>           Vendor Name   </th>
+                                 <th>           Mail Received From   </th>
+                                 <th>           Do Name PM Name   </th>
+                                 <th>           Claim Type   </th>
+                                 <th>           From_Date   </th>
+                                 <th>           To Date   </th>
+                                 <th>           Department   </th>
+                                 <th>           PO Number   </th>
+                                 <th>           Invoice No   </th>
+                                 <th>           Invoice Date   </th>
+                                 <th>           Invoice Amount   </th>
+                                 <th>           Ramco   </th>
+                                 <th>           Entry Date   </th>
+                                 <th>           Authorised Date   </th>
+                                 <th>           Entry_Done By   </th>
+                                 <th>           USER ID   </th>
+                                 <th>           Payment   </th>
+                                 <th>           Upload Number   </th>
+                                 <th>           UTR NO   </th>
+                                 <th>           Payment Date   </th>
+                                 <th>           UPLOAD STATUS   </th>
+                                 <th>           STATUS   </th>
+                                 <th>           Remarks   </th>
+                                 <th>           Received Date   </th>
+                                 <th>           Objection   </th>
+                                 <th>           Objection Raised By   </th>
+                                 <th>           Query   </th>
+                                 <th>           Resolution Date   </th>
+                                 <th>           Resolution By   </th>
+                                 <th>           Rejection Date   </th>
+                                 <th>           Rejection Done By   </th>
+                                 <th>           Location   </th>
+                                 <th>           Classification   </th>
+                                 <th>           Reporting Mngr   </th>
+                                 <th>           Zonal Head   </th>
+                                 <th>           Zone   </th>
+                                 <th>           Period   </th>
+                                 <th>           Age   </th>
+                                 <th>           HGS   </th>
+                            
+                            
+                                            
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                         
+                                    {% for enrollment_report_obj in enrollment_report_objs %}
+                                    <tr>
+                                        <th scope="row">{{forloop.counter}}</th>
+                                        <td>{{enrollment_report_obj.created_at|date:"m-d-Y g:i A"}}</td>
+                                        <td class="text-center">{{enrollment_report_obj.user.username}}</td>
+                                        <td class="text-center">{{enrollment_report_obj.total_entries}}</td>
+                                        <td class="text-center">
+                                        <p onclick="getErrors('{{enrollment_report_obj.id}}' ,3)" data-toggle="tooltip" data-placement="right" title="Click to show errors"> {{enrollment_report_obj.total_errors}}</p>
+                                        </td>
+                            
+                                    {% endfor %}
+                            
+                                    </tbody>
+
+                                    {% for data in payment_objs %}
+
+                                        <tr>
+                                    <td>      {{data.ClaimNo}}  </td>
+                                    <td>      {{data.IFIG_NO}}  </td>
+                                    <td>      {{data.Inward}}  </td>
+                                    <td>      {{data.Month}}  </td>
+                                    <td>      {{data.Employee_Code}}  </td>
+                                    <td>      {{data.Inwarded_By}}  </td>
+                                    <td>      {{data.Vendor_Code}}  </td>
+                                    <td>      {{data.Vendor_Name}}  </td>
+                                    <td>      {{data.Mail_Received_From}}  </td>
+                                    <td>      {{data.Do_Name_PM_Name}}  </td>
+                                    <td>      {{data.Claim_Type}}  </td>
+                                    <td>      {{data.From_Date}}  </td>
+                                    <td>      {{data.To_Date}}  </td>
+                                    <td>      {{data.Department}} </td>
+                                    <td>      {{data.PO_Number}} </td>
+                                    <td>      {{data.Invoice_No}} </td>
+                                    <td>      {{data.Invoice_Date}} </td>
+                                    <td>      {{data.Invoice_Amount}} </td>
+                                    <td>      {{data.Ramco}} </td>
+                                    <td>      {{data.Entry_Date}} </td>
+                                    <td>      {{data.Authorised_Date}} </td>
+                                    <td>      {{data.Entry_Done_By}} </td>
+                                     <td>   {{data.USER_ID}} </td>
+                                    <td>      {{data.Payment}} </td>
+                                     <td>     {{data.Upload_Number}} </td>
+                                    <td>      {{data.UTR_NO}} </td>
+                                    <td>      {{data.Payment_Date}} </td>
+                                    <td>      {{data.UPLOAD_STATUS}} </td>
+                                    <td>      {{data.STATUS}} </td>
+                                    <td>      {{data.Remarks}} </td>
+                                    <td>      {{data.Received_Date}} </td>
+                                    <td>      {{data.Objection|truncatechars:19 }} </td>
+                                     <td>     {{data.Objection_Raised_By}} </td>
+                                         <td>  {{data.Query}}</td>   
+                                    <td>        {{data.Resolution_Date}} </td>
+                                    <td>        {{data.Resolution_By}} </td>
+                                    <td>        {{data.Rejection_Date}} </td>
+                                    <td>        {{data.Rejection_Done_By}} </td>
+                                    <td>        {{data.Location}} </td>
+                                    <td>        {{data.Classification}} </td>
+                                    <td>        {{data.Reporting_Mngr}} </td>
+                                    <td>        {{data.Zonal_Head}} </td>
+                                    <td>        {{data.Zone}} </td>
+                                    <td>        {{data.Period}} </td>
+                                    <td>        {{data.Age}} </td>
+                                    <td>        {{data.HGS}} </td>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </table>
+                               
+                                
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

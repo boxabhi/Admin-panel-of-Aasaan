@@ -1,0 +1,200 @@
+{% extends "console/base.html"%}
+
+{% block content %}
+
+
+<main class="content bg-white">
+
+    <div class="container-fluid p-0">
+
+
+
+        <div class="container-fluid p-0">
+
+            <div class="row mb-2 mb-xl-3">
+                <div class="col-auto d-none d-sm-block">
+                    <h3>HRMS</h3>
+                </div>
+            </div>
+
+
+
+            <div class="row bg-white">
+
+                <div class="col-xl-12 col-xxl-12">
+                    <div class="card flex-fill w-100">
+
+                        <div class=" text-center">
+
+
+                            <a href="http://isustain.icicifoundation.org/" data-bs-toggle="tooltip"
+                                data-bs-placement="top" title="HRMS">
+                                <img class="img-fluid img-thumbnail p-3 m-4 zoom" style="height: 100px;border:none"
+                                    src="https://metiertech.in/wp-content/uploads/2019/04/hrms-icon.png">
+
+                            </a>
+
+                            <a href="{% url 'view_gal' %}" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Payroll">
+                                <img class="img-fluid img-thumbnail p-3 m-4 zoom" style="height: 100px;border:none"
+                                    src="https://atmosbookkeeping.co.uk/wp-content/uploads/2019/04/Payroll-Icon-1.png">
+
+                            </a>
+
+
+                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Travel">
+                                <img class="img-fluid img-thumbnail p-3 m-4 zoom" style="height: 100px;border:none"
+                                    src="https://image.flaticon.com/icons/png/512/1841/1841630.png">
+
+                            </a>
+                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title=" Insurance">
+
+                                <img class="img-fluid img-thumbnail p-3  m-4 zoom" style="height: 100px; border:none"
+                                    src="https://www.pngkit.com/png/detail/208-2081129_life-insurance-icon.png">
+
+                            </a>
+
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+                                <div class="card flex-fill " style="height: 500px;">
+                                    <div class="overflow-auto">
+                                        <div class="card-header bg-white" style="border-bottom: #F99D27 1px solid;">
+
+                                            <h5 class="card-title h4 mb-0">Job Posting </h5>
+                                        </div>
+                                        <table class="table table-hover my-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">S. NO</th>
+                                                    <th class="d-none d-xl-table-cell">Title</th>
+                                                    <th class="d-none d-xl-table-cell">Location</th>
+                                                    <th class="d-none d-xl-table-cell">View </th>
+
+
+
+                                                    <th>Created at</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for data in job_postings %}
+                                                <tr>
+                                                    <td class="text-center">{{forloop.counter}}</td>
+                                                    <td class="d-none d-xl-table-cell">
+
+
+                                                        {{data.position}}
+
+                                                    </td>
+
+                                                    <td class="d-none d-xl-table-cell">
+
+
+                                                        {{data.location}}
+
+                                                    </td>
+
+
+                                                    <td>
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="text-primary" style="background: transparent;border:none"
+                                                            data-bs-toggle="modal" data-bs-target="#show-{{data.id}}">
+                                                            <i class="fas fa-external-link-alt" style="color: #B02A30;"></i>
+                                                        </button>
+                                                        <div class="modal fade" id="show-{{data.id}}" tabindex="-1"
+                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Job Description | {{data.position}}</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        {{data.job_description|safe}}
+
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>{{data.created_at}}</td>
+
+                                                </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4 col-xxl-3 d-flex">
+                                <div class="card flex-fill w-100">
+                                    <div class="card-header bg-white" style="border-bottom: #F99D27 1px solid;">
+
+                                        <h5 class="card-title h4 mb-0">Policies</h5>
+
+
+
+                                    </div>
+                                    
+                                    <div class="card-body  w-100">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" >S. No. </th>
+                                                    <th scope="col" class="text-let">Policy</th>
+                                                    <th scope="col" class="text-center">Detail</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for policies_obj in policies_objs%}
+                                                <tr>
+                                                    <th scope="row">{{forloop.counter}}</th>
+                                                    <td>{{policies_obj.policy_title}}</td>
+                                                    <td class="text-center">
+                                                        <a target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" title="Click here to view" href="/media/{{policies_obj.policy_file}}" ><i class="fas fa-file-pdf" style="color:#B02A30;font-size: 26px;"></i></a>
+                                                    </td>
+                                                    
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                        {% if not policies_objs %}
+                                            No policies
+                                        {% endif %}
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+{% endblock %}

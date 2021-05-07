@@ -1,0 +1,80 @@
+{% extends 'console/base.html' %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong>Manage</strong> Payments</h3>
+            </div>
+
+           
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+
+                            <div class="mx-auto col-md-12 mt-5 p-2" id="enrollments"  >
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input class="form-control" type="file" id="fileupload">
+                    
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button onclick="uploadPayments()" class="btn btn-success">Upload</button>
+                                        </div>
+                                        
+                                </div>
+                              
+                                    <table class="table table-striped" id="table_id" class="display">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">S. No.</th>
+                                            <th scope="col">Is uploaded</th>
+                                            <th scope="col">Total entries</th>
+                                            <th scope="col">Created at</th>
+                                            <th scope="col">Action</th>
+
+                                         
+                            
+                            
+                                            
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                         
+                                        {% for upload_payment_obj in upload_payment_objs%}
+                                    <tr>
+                                        <th scope="row">{{forloop.counter}}</th>
+                                        <td>{{upload_payment_obj.is_uploaded}}</td>
+                                        <td class="text-center">{{upload_payment_obj.entries}}</td>
+                                        <td class="text-center">{{upload_payment_obj.created_at}}</td>
+                                        <td class="text-center">
+                                            
+                                            <button class="btn btn-info" onclick="importPayment('{{upload_payment_obj.id}}')">Import </button>
+                                          
+                                        
+                                        </td>
+
+                                        
+                                        </tr>
+                                        {% endfor %}
+                            
+                                  
+                            
+                                    </tbody>
+                                    </table>
+                               
+                                
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

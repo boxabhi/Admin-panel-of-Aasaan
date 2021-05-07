@@ -1,0 +1,579 @@
+{% load permission_tags %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ICICI Foundation</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+  <link href="/media/admin/css/app.css" rel="stylesheet">
+  <link rel="stylesheet" href="/media/css/main.css">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+  <link rel="icon" href="https://icicifoundation.org/wp-content/uploads/2017/10/cropped-favicon-1-32x32.png" sizes="32x32" />
+  <link rel="icon" href="https://icicifoundation.org/wp-content/uploads/2017/10/cropped-favicon-1-192x192.png" sizes="192x192" />
+  <link rel="apple-touch-icon-precomposed" href="https://icicifoundation.org/wp-content/uploads/2017/10/cropped-favicon-1-180x180.png" />
+
+
+  <meta name="google-signin-client_id"
+    content="465373049361-7at68q1mm3bhvbv0jeck9posmujmm2ck.apps.googleusercontent.com">
+  <style>
+    body {
+     font-size:  18px;
+     font-family: 'Raleway', sans-serif !important;
+    }
+
+    .btn-success{
+    background: #005B75 !important;
+    font-weight: bolder;
+  }
+  .btn-info{
+    background: #F99D27 !important ;
+  }
+  .btn-danger{
+    background : #B02A30 !important;
+    border : none !important;
+
+  }
+
+    .bg-primary {
+      background: #F99D27 !important
+    }
+
+    .text-primary{
+      color : #B02A30 !important;
+    }
+    .btn-primary, {
+      background: #B02A30 !important;
+      border: none !important;
+    }
+
+    .btn-success {
+      background: #053c6d;
+      border: none !important;
+    }
+    .btn-success:hover{
+      background: #15538a
+    }
+    h3{
+      color: #97291e !important;
+    }
+
+    .thead-dark{
+      background-color: #fff !important;
+    }
+
+
+    .wrapper {
+      background: #fff !important;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color : #000 !important; 
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ 
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  
+}
+    
+  </style>
+
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://demos.creative-tim.com/argon-design-system/assets/css/argon-design-system.min.css?v=1.2.2"></link>
+
+
+
+</head>
+
+<body>
+  <input type="hidden" id="csrf" value="{{csrf_token}}">
+
+
+
+{% if request.user.is_authenticated %}
+  <div class="wrapper">
+    <nav id="sidebar" class="sidebar">
+      <div class="sidebar-content js-simplebar">
+        <a class="sidebar-brand" href="/dashboard/">
+          <img class="img-fluid img-responsive" src="https://icici-foundation-api.allincall.in/files/ICICI_Foundation_Logo.png" >
+          
+        </a>
+
+        <ul class="sidebar-nav">
+          <li class="sidebar-header ">
+           <b> Menu </b>
+          </li>
+
+          <li class="sidebar-item {% if is_active != 'dashboard' %}active {%endif%}">
+            <a class="sidebar-link" href="{% url 'dashboard'%}">
+              <i class="fas fa-chart-line"></i><span class="align-middle">Dashboard</span>
+            </a>
+          </li>
+
+          
+       
+         
+
+          <li class="sidebar-item {% if is_active != 'batches'%}active {%endif%}">
+            <a class="sidebar-link" href="{% url 'batches' %}">
+              <i class="fas fa-brain"></i>
+              <span class="align-middle">Batches</span>
+            </a>
+          </li>
+
+
+
+
+
+          <li class="sidebar-item {% if is_active != 'reports'%}active {%endif%}">  
+            <a data-target="#ui" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-paperclip"></i> <span class="align-middle">Reports</span>
+            </a>
+            <ul id="ui" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              
+              <li class="sidebar-item ">
+                <a class="sidebar-link " href="{% url 'sourcing' %}">Sourcing</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link " href="{% url 'followups' %}">Follow-ups</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link " href="{% url 'enrollments' %}">Enrollments</a>
+              </li>
+              
+            </ul>
+          </li>
+     
+
+      
+
+      <li class="sidebar-item {% if is_active != 'followups'%}active {%endif%}">  
+        <a data-target="#followups" data-toggle="collapse" class="sidebar-link sidebar-link collapsed" aria-expanded="false">
+          <i class="fas fa-paperclip"></i> <span class="align-middle">Followups</span>
+        </a>
+        <ul id="followups" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+          
+          <li class="sidebar-item ">
+            <a class="sidebar-link" href="{% url 'assigned_followups' %}">Manage Trainee</a>
+          </li>
+
+          <li class="sidebar-item ">
+            <a class="sidebar-link" href="{% url 'view_assigned_followups' %}">View Assigned Followups</a>
+          </li>
+       
+          <li class="sidebar-item ">
+            <a class="sidebar-link" href="{% url 'manage_followups' %}">Manage Followups</a>
+          </li>
+      
+          
+      
+        </ul>
+      </li>
+          
+
+
+      
+    
+
+          <li class="sidebar-item {% if is_active != 'referral'%}active {%endif%}">
+            <a class="sidebar-link" href="{% url 'referral' %}">
+              <i class="fas fa-external-link-alt"></i>
+              <span class="align-middle">Referral</span>
+            </a>
+          </li>
+
+         
+
+
+         
+
+          <li class="sidebar-item {% if is_active != 'users'%}active {%endif%}">  
+            <a data-target="#user" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-users"></i> <span class="align-middle">Users</span>
+            </a>
+            <ul id="user" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              
+              {% if user|can:'view_users' %}
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'show_users' %}">View Users</a>
+              </li>
+              {% endif %}
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'show_users' %}">View Users</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'upload_user_excel' %}">Upload Users</a>
+              </li>
+           
+              
+            </ul>
+          </li>
+         
+        
+          
+
+          
+          <li class="sidebar-item {% if is_active != 'news'%}active {%endif%}">  
+            <a data-target="#news" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-newspaper"></i> <span class="align-middle">News</span>
+            </a>
+            <ul id="news" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              
+             
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'manage_news' %}">Manage News</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'create_news' %}">Create News</a>
+              </li>
+           
+              
+            </ul>
+          </li>
+
+          <li class="sidebar-item {% if is_active != 'data'%}active {%endif%}">  
+            <a data-target="#data" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-tree"></i> <span class="align-middle">Tree Plantation</span>
+            </a>
+            <ul id="data" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'create_trees' %}">Create Tree Plantation</a>
+              </li>
+             
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'manage_trees_data' %}">Manage Tree Plantation</a>
+              </li>
+             
+              
+           
+              
+            </ul>
+          </li>
+
+
+          <li class="sidebar-item {% if is_active != 'data'%}active {%endif%}">  
+            <a data-target="#water_shed" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-hand-holding-water"></i> <span class="align-middle">Water Shed </span>
+            </a>
+            <ul id="water_shed" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'create_watershed_data' %}">Create Watershed data</a>
+              </li>
+
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'manage_watershed_data' %}">Manage Watershed data</a>
+              </li>
+              
+            
+             
+              </ul>
+              </li>
+             
+
+          
+          <li class="sidebar-item {% if is_active != 'partners'%}active {%endif%}">  
+            <a data-target="#partners" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-handshake"></i> <span class="align-middle">Placement Partners</span>
+            </a>
+            <ul id="partners" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              
+             
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'placement_partners' %}"> Registration Requests</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'scheduled_interviews' %}">Scheduled Interviews</a>
+              </li>
+
+              
+            </ul>
+          </li>
+
+          <li class="sidebar-item {% if is_active != 'payments'%}active {%endif%}">  
+            <a data-target="#payments" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-tag"></i> <span class="align-middle">Payments</span>
+            </a>
+            <ul id="payments" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'payments' %}"> Manage Payments</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'upload_payments' %}">Upload Payments</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'search_payments' %}">Search Payments</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="sidebar-item {% if is_active != 'filter'%}active {%endif%}">  
+            <a data-target="#filter" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-filter"></i><span class="align-middle">Filter</span>
+            </a>
+            <ul id="filter" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'filter_data' %}"> Search Trainee</a>
+              </li>
+            
+            </ul>
+          </li>
+
+          
+          <li class="sidebar-item {% if is_active != 'Financial'%}active {%endif%}">  
+            <a data-target="#financial" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-tag"></i> <span class="align-middle">Financial Literacy</span>
+            </a>
+            <ul id="financial" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'add_organization' %}"> Add Organization</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'manage_organization' %}">Manage Organization</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'add_session' %}">Add Session</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'manage_session' %}">Manage Session</a>
+              </li>
+            </ul>
+          </li>
+         
+
+<!--           
+          <li class="sidebar-item {% if is_active != 'placement_partners' %}active {%endif%}">
+            <a class="sidebar-link" href="{% url 'placement_partners'%}">
+              <i class="fas fa-chart-line"></i><span class="align-middle">Placement partners</span>
+            </a>
+          </li> -->
+
+          <li class="sidebar-item {% if is_active != 'Ceritificate'%}active {%endif%}">  
+            <a data-target="#ceritificate" data-toggle="collapse" class="sidebar-link">
+              <i class="fas fa-tag"></i> <span class="align-middle">Certificates</span>
+            </a>
+            <ul id="ceritificate" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'view_issue_ceritficate' %}">View Issue Certificates</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'create_certificate_templates' %}">Create Certificates</a>
+              </li>
+              <li class="sidebar-item ">
+                <a class="sidebar-link" href="{% url 'manage_certificate_templates' %}">Manage Certificates</a>
+              </li>
+            
+            </ul>
+          </li>
+
+       
+          
+
+         
+
+
+          <li class="sidebar-item active">
+            <a class="sidebar-link" href="{% url 'impact_upload' %}">
+              <i class="far fa-calendar-alt"></i>
+              <span class="align-middle">Upload Impact Excel</span>
+            </a>
+          </li>
+
+          <li class="sidebar-item active">
+            <a class="sidebar-link" href="{% url 'upload_internal_job_postings' %}">
+              <i class="fas fa-network-wired"></i>
+              <span class="align-middle">Create Job postings</span>
+            </a>
+          </li>
+
+         
+          
+
+
+          <li class="sidebar-item">
+            
+
+          </li>
+        
+        </ul>
+
+       
+
+
+      </div>
+    </nav>
+
+
+    <div class="main">
+      <nav class="navbar navbar-expand navbar-light navbar-bg" style="border-bottom: #F99D27 2px solid;">
+
+        <a class="sidebar-toggle d-flex">
+
+          <i class="hamburger align-self-center"></i>
+        </a>
+        <span class="align-middle"></span>
+
+        <div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+				
+				
+						<li class="nav-item dropdown">
+						
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block " href="#" data-toggle="dropdown" aria-expanded="true">
+            
+            
+                <img {% if request.user.profile.get_image %} src="{{request.user.profile.get_image}}" {% else %} src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" {% endif %} class="avatar img-fluid rounded-circle mr-1" alt="{{request.user.username}}">
+                 <span class="text-dark">{{request.user.name}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-right ">
+								<a class="dropdown-item"  href="{% url 'profile' %}"> <i class="fas fa-user-circle"></i> Profile </a>
+							
+                <div class="dropdown-divider"></div>
+								<a onclick="logout()" class="dropdown-item" >Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+
+      </nav>
+
+      
+      {% block content %}
+
+      {% endblock %}
+    </div>
+  </div>
+
+
+  {% else %}
+
+  {% block login %}
+
+  {% endblock %}
+
+
+  {% endif  %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Welcome!</h5>
+          <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+
+          <form id="login_form">
+            <div class="mb-3">
+              <label for="username" class="col-form-label">Username:</label>
+              <input type="text" id="username" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="col-form-label">Password:</label>
+              <input type="password" id="password" class="form-control" id="password">
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="login()" class="btn btn-primary">Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div class="modal fade" id="messagesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Messages</h5>
+       
+        </div>
+        <div class="modal-body">
+          <div id="messages"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script src="/media/admin/js/app.js"></script>
+  <script src="/media/js/tata.js"></script>
+  <script src="/media/js/main.js"></script>
+  <script src="/media/js/crypto.js"></script>
+  <script src="/media/js/encrypt.js"></script>
+  
+
+  <script>
+    window.$('#table_id').DataTable(
+      {
+        "scrollX": true
+    }
+    );
+  </script>
+  
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

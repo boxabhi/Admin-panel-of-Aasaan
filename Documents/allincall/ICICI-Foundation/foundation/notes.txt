@@ -1,0 +1,43 @@
+https://codepen.io/shubhamc_007/pen/GWvZGN
+
+https://bashooka.com/coding/css-javascript-file-upload-examples/
+
+
+| userid | EmpId | NSDCTrainerId | EmpName |
+ReportingEmpId | ReportingEmpName | UnitName |
+ZoneId | ZoneName   | StateId | StateName | 
+DistrictId | DistrictName | LocationId | LocationName|
+Grade      | DepartmentName | RoleId | RoleName   | 
+Category | ActStatus | CourseId | CourseName | DateOfJoin | 
+ContractEmployee | DateOfContractExpiry | NoticePeriod | Gender |
+DateOfBirth | MaritalStatus | Religion | AadhaarNo | SpouseName |
+FathersName | MothersName | FatherGuardianSpousePhoneNo |
+AddressLine1 | AddressLine2 | Village | TownCity | District |
+State | PINCode | PermanentAddress | PAddressLine1 | PAddressLine2 |
+PVillage | PTownCity | PDistrict | PState | PPINCode | PhoneNo |
+Email | PersonalEmail | Qualification1 | Qualification2 | 
+ProfessionalQualification | AreaOfExpertise | TotalWorkExperience | 
+CriminalStatus | Photograph | IdProofNo | IdProof | BankName | Branch | 
+AccountType | AccountNo | IFSCCode | CancelledCheque | PANNo | UANNo | 
+PFNo | JobDescription | ReferralName | ReferralContNo | Source | 
+NameOfTheAgency | RefEmpId | RefEmpName | Other | Rehired | OldEmpId | 
+AdditionalComments | probationPeriod | LastAction | LstActnDnById | 
+LstActnDnByName | CreatedOn | UpdatedOn  | Validity |
+
+
+
+select DateOfBirth  from masterstaff  WHERE DAY(25) = DAY(GETDATE())  LIMIT 10;
+
+
+SELECT * FROM masterstaff T0 WHERE datepart(month, T0.[peoplebirthDate]) = datepart(month,GETDATE()) AND datepart(day, T0.[peoplebirthDate]) = datepart(day, GETDATE()) 
+
+
+SELECT * FROM masterstaff 
+WHERE DATEADD( Year, DATEPART( Year, GETDATE()) - DATEPART( Year, DateOfBirth), DateOfBirth)
+      BETWEEN CONVERT( '03/04/2021', GETDATE()) AND CONVERT( '03/06/2021', GETDATE() + 30)
+
+
+Select * from masterstaff where DateOfBirth LIKE '%03%';
+
+
+Select EmpId , EmpName ,DateOfBirth  from masterstaff where DateOfBirth LIKE '%05-03%' AND ActStatus=1;

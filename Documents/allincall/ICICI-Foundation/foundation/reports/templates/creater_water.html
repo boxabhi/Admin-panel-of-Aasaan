@@ -1,0 +1,122 @@
+{% extends "console/base.html" %}
+{% block content %}
+<script src="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.js"></script>
+
+<link rel="stylesheet" type="text/css"
+  href="https://unpkg.com/file-upload-with-preview@4.1.0/dist/file-upload-with-preview.min.css" />
+
+
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong>Add Watershed Structure Data </strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label>
+                                        Date 
+                                    </label>
+                                    <input type="date" class="form-control" id="date">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Name of School/Organisation </label>
+                                    <input type="text" class="form-control" id="name_of_school">
+                                </div>
+
+                                </div>
+                                <div class="row mt-3">
+                                <div class="form-group col-md-6">
+                                    <label>Name of village</label>
+                                    <input type="text" class="form-control" id="name_of_village">
+                                </div>
+
+
+                                <div class="form-group col-md-6">
+                                    <label>Block</label>
+                                    <input type="text" class="form-control" id="block">
+                                </div>
+
+                                </div>
+
+
+                                <div class="row mt-3">
+                                <div class="form-group col-md-6">
+                                    <label>District</label>
+                                    <input type="text" class="form-control" id="district">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label>Parternship</label>
+                                    <input type="text" class="form-control" id="parternship">
+                                </div>
+</div>
+<div class="row mt-3">
+
+                                <div class="form-group col-md-6">
+                                    <label>Terrace</label>
+                                    <input type="text" class="form-control" id="terrace">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label>Reservoir type</label>
+                                    <input type="text" class="form-control" id="reservoir_type">
+                                </div>
+
+                                </div>
+
+                                <div class="custom-file-container" data-upload-id="myUniqueUploadId">
+                                    <label>Upload Images for Water Shed
+                                      <a href="javascript:void(0)" class="custom-file-container__image-clear"
+                                        title="Clear Image">&times;</a></label>
+                                    <label class="custom-file-container__custom-file">
+                                      <input type="file" class="custom-file-container__custom-file__custom-file-input" accept="*" multiple
+                                        aria-label="Choose File" />
+                                      <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+                                      <span class="custom-file-container__custom-file__custom-file-control"></span>
+                                    </label>
+                                    <div class="custom-file-container__image-preview"></div>
+                                  </div>
+                    
+                    
+                                
+                                <button onclick="createWaterShed()" class="btn btn-success mt-4">Submit </button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+<script>
+    var upload = new FileUploadWithPreview("myUniqueUploadId");
+  
+    upload.emulateInputSelection(); // to open image browser
+    upload.clearPreviewPanel(); // clear all selected images
+  
+    var stored_files = []
+  
+    window.addEventListener("fileUploadWithPreview:imagesAdded", function (e) {
+  
+  
+      stored_files = e.detail.cachedFileArray
+  
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Manage Trees</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row container mx-auto">
+                                <div class="col-md-3  card card-s text-center">
+                                    <div class="card-body">
+                                        Total <br>
+                                        <b>{{total}}</b>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-md-3 card-s card text-center">
+                                    <div class="card-body">
+                                        Total in current year <br>
+                                        <b>{{current_year}}</b>
+                                    </div>
+                                </div>
+                                <div class="col-md-3  card card-s text-center">
+                                    <div class="card-body">
+                                        Total in previous year
+                                        <br> <b>
+                                            {{previous_year}}
+                                        </b>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+
+                            </div>
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-white">
+                                    <tr>
+                                        <th scope="col">
+                                            <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                        </th>
+                                        <th scope="col">S. NO</th>
+                                        <th scope="col">Date of Plantation </th>
+                                        <th scope="col">Isa Location </th>
+                                        <th scope="col">No of Trees</th>
+
+                                        <th scope="col">Varieties</th>
+
+                                        <th scope="col">Occasion</th>
+                                        <th scope="col">Parternship</th>
+                                        <th scope="col">Staff</th>
+                                        <th scope="col">Post Plantation Care By</th>
+                                        <th scope="col">Action</th>
+
+
+
+                                    </tr>
+                                </thead>
+
+                                {% for data in trees_objs %}
+
+
+                                <tbody id="show_batches">
+                                    <tr>
+                                        <td>
+
+                                            <input type="checkbox" id="checkboxes">
+
+
+                                        </td>
+                                        <td class="text-center">{{forloop.counter}}</td>
+                                        <td class="text-center">{{data.date_of_plantation}}</td>
+                                        <td class="text-center">{{data.isa_location}}</td>
+                                        <td class="text-center">{{data.no_of_trees}}</td>
+                                        <td class="text-center">{{data.varieties}} </td>
+                                        <td class="text-center">{{data.occasion}}</td>
+                                        <td class="text-center">{{data.parternship}}</td>
+                                        <td class="text-center">
+                                            {{data.staff}}
+                                        </td>
+                                        <td class="text-center">
+                                            {{data.post_plantation_care_by}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            <a href="{% url 'view_tree_plantation_images' data.id %}"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="View Images"
+                                                class="">
+                                                <i style="font-size: 24px;" class="fas fa-image"></i> 
+                                            </a>
+                                        </td>
+
+
+
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .card-s {
+        border: 1px solid rgb(216, 216, 216);
+        margin: 5px;
+        background-color: rgb(250, 248, 248);
+        -webkit-box-shadow: 9px 23px 34px -36px rgba(168,163,168,1);
+-moz-box-shadow: 9px 23px 34px -36px rgba(168,163,168,1);
+box-shadow: 9px 23px 34px -36px rgba(168,163,168,1);
+
+
+    }
+</style>
+
+
+{% endblock %}

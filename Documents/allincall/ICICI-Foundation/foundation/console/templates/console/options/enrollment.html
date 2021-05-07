@@ -1,0 +1,112 @@
+<div class="mx-auto col-md-12 mt-5" id="enrollments"  {% if option == 3 %}  style="display:block" {%else %} style="display:none" {% endif %}>
+
+    {% if enrollment_report_objs %}
+        <table class="table table-striped" id="table_id" class="display">
+            <thead>
+              <tr>
+                <th scope="col">S. No.</th>
+                <th scope="col">Date & time</th>
+                <th scope="col">User</th>
+                <th scope="col">Total entries</th>
+                <th scope="col">Total errors</th>
+
+                <th scope="col">Total messages sent</th>
+                <th scope="col">Total emails sent</th>
+                <th scope="col">Actions</th>
+                <th scope="col">Status</th>
+                
+                <th scope="col">Refresh</th>
+                <th scope="col">Download</th>
+                <th scope="col">Visibility</th>
+                <th scope="col">View</th>
+
+
+                
+              </tr>
+            </thead>
+            <tbody>
+             
+        {% for enrollment_report_obj in enrollment_report_objs %}
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{enrollment_report_obj.created_at|date:"m-d-Y g:i A"}}</td>
+            <td class="text-center">{{enrollment_report_obj.user.username}}</td>
+            <td class="text-center">{{enrollment_report_obj.total_entries}}</td>
+            <td class="text-center">
+            <p onclick="getErrors('{{enrollment_report_obj.id}}' ,3)" data-toggle="tooltip" data-placement="right" title="Click to show errors"> {{enrollment_report_obj.total_errors}}</p>
+            </td>
+
+            <td class="text-center">
+                {% if enrollment_report_obj.total_errors > 0 %}
+                -
+                {% else %}
+                {{ enrollment_report_obj.get_sent_message}}
+                {% endif %}
+            </td>
+            <td class="text-center">
+                {% if enrollment_report_obj.total_errors > 0 %}
+                -
+                {% else %}
+                {{ enrollment_report_obj.get_sent_email}}
+
+                {% endif %}
+            </td>
+
+            <td class="text-center">
+            
+                {% if enrollment_report_obj.total_errors > 0 %}
+              -
+                {% else %}
+                {% if enrollment_report_obj.triggered_status %}
+                <button onclick="sendSMS('{{enrollment_report_obj.id}}' , 3)"  {% if enrollment_report_obj.current_status <= 2   %} disabled {% endif %}    class="btn btn-info text-white btn-sm">SMS</button>
+
+                {% else %}
+                <button onclick="trigger('{{enrollment_report_obj.id}}' , 3)" class="btn btn-primary btn-sm">Submit</button>
+                {% endif %}
+                {% endif%}
+            </td>
+
+            <td class="text-center">
+              <span class="badge badge-primary text-dark">{{ enrollment_report_obj.get_current_status}}</span>
+            </td>
+            <td class="text-center">
+              {% if enrollment_report_obj.total_errors > 0 %}
+              -
+              {% else %}
+
+             
+      <i class="fas fa-sync"  {% if enrollment_report_obj.current_status  >= 2%}  onclick="refresh('{{enrollment_report_obj.id}}' , 3)"  {% else %} style="color:grey" {% endif %}></i>
+
+             
+
+
+              {% endif %}
+            </td>
+            <td class="text-center ">
+                <a href="{{enrollment_report_obj.download_file_path}}" class="btn btn-success btn-sm color-white"><i class="fas fa-cloud-download-alt color-white"></i></button>
+            </td>
+
+            <td class="text-center">
+              <label class="switch">
+                <input type="checkbox" checked onchange="remove('{{enrollment_report_obj.id}}',3)">
+                <span class="slider round"></span>
+              </label>
+            
+            </td>
+
+            <td>
+              {% if enrollment_report_obj.total_errors > 0 %}
+              -
+              {% else %}
+              <a href="{% url 'views_enrollments' enrollment_report_obj.id %}">View</a>
+
+            {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+
+        </tbody>
+        </table>
+   
+    {% endif %}
+  </div>

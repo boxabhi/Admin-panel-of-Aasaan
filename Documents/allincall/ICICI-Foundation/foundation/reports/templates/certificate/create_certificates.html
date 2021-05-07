@@ -1,0 +1,43 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Create Ceritificate template</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Enter ceritficate template name</label>
+                                    <input class="form-control" type="text" id="template_name" placeholder="Certificate template name">
+                                </div>
+
+                                <div class="col-md-12 form-group mt-3">
+                                    <label>Enter ceritficate HTML</label>
+                                    <textarea class="form-control" id="template_html"  style="height: 500px;"></textarea>
+                                </div>
+
+
+                            </div>
+
+                            <button class="btn btn-info mt-4" onclick="createTemplate()">Create Template</button>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

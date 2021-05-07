@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% block start %}
+<!-- Container element -->
+<div class="parallax">    
+</div>
+<div class="container mt-5 pt-4">
+    <div class="text-center">
+      <h3>  See Upcoming Batches </h3>
+    </div>  
+    <form method="get" class="mt-5" id="form">
+   
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <label>Select ISA Academy</label>
+                <select class="form-control" name="isa_id" id="isa_id" onchange="populateCourses()">
+                    <option>Choose</option>
+                    {% for isa in isa_id_list %}
+                    <option {% if isa_id == isa.isa_code %} selected {% endif %}  value="{{isa.isa_code}}">{{isa.ISAName}}  </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md-4 form-group">
+                <label>Select Course <span id="show_count_course"></span></label>
+                <select class="form-control" name="course_id" id="course_id" name="isa_academy">
+                    <option value="-1">All  </option>
+                </select>
+            </div>
+            <div class="col-md-4 form-group">
+                <label>See Batches for </label>
+                <select class="form-control" name="filter_days" id="filter_days" onchange="showCustomDateFilter()">
+                    <option>Choose</option>
+                    <option {% if filter_days ==  'next_1_months' %} selected {% endif %} value="next_1_months">Next 1 month</option>
+                    <option  {% if filter_days ==  'next_2_months' %} selected {% endif %} value="next_2_months">Next 2 month</option>
+                    <option  {% if filter_days ==  'next_3_months' %} selected {% endif %} value="next_3_months">Next 3 month</option>
+                    <option   {% if filter_days ==  'next_6_months' %} selected {% endif %} value="next_6_months">Next 6 month</option>
+                    <option  {% if filter_days ==  'custom_date' %} selected {% endif %} value="custom_date">Custom date range</option>
+                </select>
+            </div>
+            <div class="col-md-8 mt-3" >
+                <div class="row" id="custom_date_filter"  style="display: none;">
+                    <div class="col-md-6">
+                        <label>Select Start Date</label>
+                        <input type="date" value="{{batch_start_from_date}}"  id="batch_start_from_date" name="start_date" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Select End Date</label>
+                        <input type="date" value="{{batch_start_to_date}}" id="batch_start_to_date" name="end_date" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 form-group" style="margin-top: 15px;">
+                <button class="btn btn-primary  mt-4"  style="margin-top: 45px;">Search</button>
+                </div>
+            </div>
+
+        </form>
+        
+
+        
+    
+    <div class="mt-4">
+        {% if searched %}
+        <p id="not_found">No Batches found</p>
+        {% endif %}
+    
+    <!-- <h4 class="mb-4"><b>All Bathces of - </b> Jaipur</h4> -->
+        <div class="text-center" id="spinner" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+{% if courses %}
+
+    <table class="table table-striped table-hover bg-white mb-5 pb-5"  id="table_id">
+        <thead>
+            <tr>
+              <th scope="col">S. NO</th>
+              <th scope="col">Batch name</th>
+              <th scope="col">Batch Id</th>
+              <th scope="col">Batch Capacity</th>
+              <th scope="col">Course</th>
+              <th scope="col">ISA Name</th>
+              <th scope="col">Shift</th>
+
+              <th scope="col">Batch Start Date</th>
+              <th scope="col">Batch End Date</th>
+
+            </tr>
+          </thead>
+          <tbody >
+              {% for course in courses %}
+           
+              <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{course.BatchName}}</td>
+                <td>{{course.BatchId}}</td>
+                <td class="text-center">{{course.BatchCapacity}}</td>
+                <td>{{course.Course}}</td>
+                <td>{{course.ISAName}}</td>
+                <td>{{course.Shift}}</td>
+                <td>{{course.BatchStartDate}}</td>
+                <td>{{course.BatchEndDate}}</td>      
+              </tr>
+              {% endfor %}
+
+            
+          </tbody>
+      </table>
+    {% endif %}
+
+</div>
+</div>
+
+
+
+<script>
+
+    window.$('#table_id').DataTable();
+
+    var isa_dict = JSON.parse('{{isa_id_dict|escapejs}}')
+    var course_id_dict = JSON.parse('{{course_id_dict|escapejs}}')
+    var element = document.getElementById('course_id')
+
+    var form_element = document.getElementById('form')
+    var spinner = document.getElementById('spinner')
+
+    
+    
+    var course_id = null
+    {% if course_id %}
+    course_id =  "{{course_id}}"
+    {% endif %}
+
+
+    document.getElementById("form").addEventListener("submit", function(event){
+         event.preventDefault()
+        
+         spinner.style.display = ''
+
+         setTimeout(() => {
+            spinner.style.display = 'none'
+            form_element.submit()
+         }, 1500);
+
+    });
+
+
+    populateCourses()
+
+
+
+
+    function populateCourses(){
+
+
+
+             
+            var courses = []
+            var isa_id = document.getElementById('isa_id')
+            console.log(isa_id.value)
+
+            if(isa_id.value == 'Choose'){
+                $("#course_id").empty();
+            var option = document.createElement("option");
+
+            option.text = 'All';
+            option.value = -1
+            element.add(option);
+            document.getElementById('show_count_course').innerText = ''
+            return;
+            }
+
+            var courses_available = isa_dict[`${isa_id.value}`].AvailableCourses
+
+
+            for(var i=0;i<courses_available.length;i++){
+                
+                var course = course_id_dict[courses_available[i]]
+                
+                courses.push({
+                    'CourseName' : course.CourseName,
+                    'CourseId' : courses_available[i]
+                })
+            }
+
+            $("#course_id").empty();
+            var option = document.createElement("option");
+
+            option.text = 'All';
+            option.value = -1
+            element.add(option);
+
+            for(var i=0;i<courses.length;i++){
+                var option = document.createElement("option");
+                console.log(course_id)
+                option.text = courses[i].CourseName;
+                option.value = courses[i].CourseId
+                if(course_id == courses[i].CourseId){
+                    option.setAttribute('selected', true);  
+                }
+                element.add(option);
+            }
+
+            document.getElementById('show_count_course').innerText = `- (Available courses ${courses.length})`
+
+            console.log(courses)
+    }
+
+function showCustomDateFilter(){
+    var filter_days = document.getElementById('filter_days')
+    var custom_date_filter = document.getElementById('custom_date_filter')
+    if(filter_days.value == 'custom_date'){
+        custom_date_filter.style.display = ''
+    }else{
+        custom_date_filter.style.display = 'none'
+    }
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+<style>
+    .parallax {
+      /* The image used */
+      background-image: url("https://images.pexels.com/photos/1181474/pexels-photo-1181474.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    
+      /* Set a specific height */
+      min-height: 300px;
+    
+      /* Create the parallax scrolling effect */
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+    </style>
+{% endblock %}

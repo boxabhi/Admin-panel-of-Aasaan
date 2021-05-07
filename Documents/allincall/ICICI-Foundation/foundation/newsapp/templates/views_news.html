@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block start %}
+
+<div class="bg-white p-5">
+
+
+<div class="container bg-white">
+    <h1>{{news_obj.title}}</h1>
+    {{news_obj.content |safe}}
+</div>
+
+</div>
+
+
+
+
+
+{% endblock %}

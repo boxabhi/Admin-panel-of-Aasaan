@@ -1,0 +1,90 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong> Enrollments Reports</strong></h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+
+              <a href="{% url 'enrollments' %}" class="btn btn-info mb-4"><i class="fas fa-arrow-left"></i></a>
+
+
+              <div class="text-right mb-4 d-flex">
+                <div class="form-group">
+                  <select class="from-control" id="selected_option">
+                    <option value="1">Send SMS</option>
+                    <option value="2">Refresh</option>
+
+
+                  </select>
+                </div>
+                <div class="pl-3">
+                <button class="btn btn-info" onclick="check(1)">Send </button>
+              </div>
+              </div>
+              <table class="table" id="table_enrollments" class="display">
+                <thead class="thead-white">
+                  <tr>
+                    <th scope="col">CheckBox</th>
+                    <th scope="col">S. NO</th>
+                    <th scope="col">Applicant ID</th>
+                    <th scope="col">Contact No</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Trainee ID</th>
+
+                    <th scope="col">SMS Status</th>
+                    <th scope="col">Email Status</th>
+                    <th scope="col">Pk</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+
+                 
+
+
+                  {% for enrollment in enrollments %}
+                  <tr>
+                    <td></td> 
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{enrollment.applicant_id}}</td>
+                    <td>{% if enrollment.contact %} {{enrollment.contact}} {% else %} - {% endif %} </td>
+                    <td>
+                      {% if enrollment.email %} {{enrollment.email}} {% else %} - {% endif %}
+
+                    </td>
+                    <td> {% if enrollment.trainee_id %} {{enrollment.trainee_id}} {% else %} - {% endif %} </td>
+                    <td>{{enrollment.sms_status}}</td>
+                    <td>{{enrollment.email_status}}</td>
+                    <td>{{enrollment.pk}}</td>
+
+
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+
+
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}

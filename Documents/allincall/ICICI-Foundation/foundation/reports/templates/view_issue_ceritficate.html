@@ -1,0 +1,110 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong>View Issued Certificates</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+
+    <form class="container-fluid p-4" method="get">
+        <div class="row">
+            <div class="col-md-4 form-group">
+                <label>Trainee Id</label>
+                <input class="form-control" placeholder="Enter Trainee Id" name="trainee_id">
+            </div>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-info mt-4">Search</button>
+            </div>
+        </div>
+    </form>                            
+                        </div>
+                        <div class="card-body">
+
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-white">
+                                  <tr>
+                                    <th scope="col">
+                                      <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                    </th>
+                                    <th scope="col">S. NO</th>
+                                    <th scope="col">Trainee id </th>
+                                    <th scope="col">Trainee Name </th>
+
+                                    <th scope="col">Certificate id </th>
+                                    <th scope="col">Is valid</th>
+                                    <th scope="col">Is approved </th>
+                                    <th scope="col">Remarks</th>
+                                    <th scope="col">Issue Date </th>
+                                    <th scope="col">View</th>
+                
+                                  </tr>
+                                </thead>
+                                <tbody>
+                
+                                  {% for certificate in certificates %}
+                
+                                  <tr>
+                                    <td>
+                                      <input type="checkbox" id="checkboxes" >
+                                    </td>
+                                    <td>
+                                        {{forloop.counter}}
+                                    </td>
+                                    <td>
+                                        {{certificate.trainee_id.trainee_id}}
+                                    </td>
+                                    <td>
+                                        {{certificate.trainee_id.trainee_name}}
+                                    </td>
+                                    <td>
+                                        {{certificate.certificate_id}}
+                                    </td>
+                                    <td>
+                                        {{certificate.is_valid}}
+                                    </td>
+                                    <td>
+                                        {{certificate.is_approved}}
+                                    </td>
+                                    <td>
+                                        {{certificate.remarks}}
+                                    </td>
+                                    <td>
+                                        {{certificate.created_at}}
+                                    </td>
+                                    <td>
+                                      <a target="_blank" href="/media/certificates/{{certificate.file_path}}" class="btn btn-info">View</a>
+                                    </td>
+                                  
+                                    </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                    </table>
+                                    
+
+
+    
+                                    
+                            
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+{% endblock %}

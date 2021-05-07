@@ -1,0 +1,90 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Manage Watershed Data</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+
+                            <div>
+                              
+                            </div>
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-white">
+                                    <tr>
+                                        <th scope="col">
+                                            <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                        </th>
+                                        <th scope="col">S. NO</th>
+                                        <th scope="col">Date </th>
+                                        <th scope="col">Name of School</th>
+                                        <th scope="col">Name of Village</th>
+
+                                        <th scope="col">Block</th>
+
+                                        <th scope="col">District</th>
+                                        <th scope="col">Terrace</th>
+                                        <th scope="col">Reservoir Type</th>
+                                      
+                                        <th>Action</th>
+                                      
+                                   
+                                    </tr>
+                                </thead>
+                          
+                                {% for data in water_objs %}
+                            
+                               
+                                <tbody id="show_batches">
+                                    <tr>
+                                        <td>
+                                      
+                                            <input type="checkbox" id="checkboxes">
+
+
+                                        </td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{data.date}}</td>
+                                        <td>{{data.name_of_school}}</td>
+                                        <td>{{data.name_of_village}}</td>
+                                        <td class="text-center">{{data.block}} </td>
+                                        <td>{{data.district}}</td>
+                                        <td>{{data.terrace}}</td>
+                                        <td>
+                                            {{data.reservoir_type}}
+                                        </td>
+                                       
+
+                                        
+                                            <td class="">
+                                                <a href="{% url 'view_water_shed_images' data.id %}" class="text-info" ><i style="font-size: 24px;" class="fas fa-image"></i> </a>
+                                            </td>
+                                        
+                                        
+                                      
+
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>  
+
+
+{% endblock %}

@@ -1,0 +1,271 @@
+{% extends "console/base.html" %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static "client_side_image_cropping/cropping.css" %}">
+</script>
+<link rel="stylesheet" href="{% static "client_side_image_cropping/cropping_widget.css" %}">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{% static "client_side_image_cropping/croppie.min.js" %}"></script>
+<script src="{% static "client_side_image_cropping/cropping_widget.js" %}"></script>
+
+<link href="/media/css/croppie.css" rel="stylesheet">
+<script src="/media/js/croppie.js"></script>
+
+
+
+<main class="content">
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong>User </strong> Profile </h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="row">
+              <div class="col-md-4 col-xl-3">
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <h5 class="card-title mb-0">Profile Details</h5>
+                  </div>
+                  <div class="card-body text-center">
+                    <img {% if request.user.profile.get_image %} src="{{request.user.profile.get_image}}" {% else %}
+                      src="/media/profile/default.png" {% endif %} class=" rounded-circle img-fluid"
+                      style="height: 150px; width: 150px;">
+                    <i class="fas fa-pen" onclick="showForm()"></i>
+                    <h5 class="card-title mb-0 mt-2">{{request.user.username}}</h5>
+
+
+                  </div>
+                  <hr class="my-0">
+                  <div class="card-body">
+                    <h5 class="h6 card-title">Allowed Access</h5>
+                    {% if not request.user.role.all %} No role assigned {% endif %}
+                    {% for role in request.user.role.all %}
+                    <a href="#" class="badge bg-primary mr-1 my-1">{{role}}</a>
+                  
+                    {% endfor %}
+
+                  </div>
+                  <hr class="my-0">
+                  <div class="card-body">
+                    <h5 class="h6 card-title">About</h5>
+                    <ul class="list-unstyled mb-0">
+                      <li class="mb-1">
+                        <i class="fas fa-address-card"></i> Emp ID <a href="#">
+                          {% if request.user.profile.emp_id %}
+                          {{request.user.profile.emp_id}}
+                          {% else %}
+                          N/A
+                          {% endif %}
+                        </a></li>
+                      <li class="mb-1">
+                        <i class="fas fa-phone-square-alt"></i> Phone <a href="#">
+                          {% if request.user.profile.mobile %}
+                          {{request.user.profile.mobile}}
+                          {% else %}
+                          N/A
+                          {% endif %}
+
+                        </a>
+                      </li>
+
+                      <li class="mb-1">
+                        <i class="fas fa-map-pin"></i> Address <a href="#">{{request.user.profile.address}}</a>
+                      </li>
+                      <li class="mb-1">
+                        <i class="fas fa-birthday-cake"></i> Address <a href="#">{{request.user.profile.dob}}</a>
+                      </li>
+
+                    </ul>
+                  </div>
+                  <hr class="my-0">
+
+                </div>
+              </div>
+
+              <div class="col-md-8 col-xl-9">
+                <div class="card">
+                  <div class="card-header">
+
+                    <h5 class="card-title mb-0">Profile</h5>
+                  </div>
+                  <div class="card-body h-100">
+
+                    <p>
+                      <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Update Profile
+                      </a>
+
+                    </p>
+                    <div class="collapse" id="collapseExample">
+                      <div class="card card-body">
+                        <form id="update_profile_form">
+                          <div class="row mt-3">
+                            <div class="form-group col-md-6">
+                              <label for="exampleInputEmail1">Email address</label>
+                              <input type="email" id="email" disabled value="{{ request.user.username}}"
+                                class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="exampleInputEmail1">Username</label>
+                              <input type="email" value="{{request.user.username}}" disabled class="form-control"
+                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+
+                          </div>
+                          <div class="row mt-3">
+                            <div class="form-group col-md-6">
+                              <label for="exampleInputEmail1">First name</label>
+                              <input type="text" id="first_name" value="{{request.user.first_name}}"
+                                class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                              <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                anyone
+                                else.</small>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                              <label for="exampleInputEmail1">Last name</label>
+                              <input type="text" id="last_name" value="{{request.user.last_name}}" class="form-control"
+                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+
+                          </div>
+                          <div class="row mt-3">
+
+                            <div class="form-group col-md-6">
+                              <label for="exampleInputEmail1">Employee ID</label>
+                              <input type="text" id="emp_id" value="{{request.user.profile.emp_id}}"
+                                class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                              <label for="exampleInputEmail1">Mobile</label>
+                              <input type="text" id="mobile" value="{{request.user.profile.mobile}}"
+                                class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+
+                          </div>
+
+                          <div class="row mt-3">
+
+                            <div class="form-group col-md-6">
+                              <label for="exampleInputEmail1">DOB</label>
+                              <input type="date" value="{{request.user.profile.dob}}" id="dob" class="form-control"
+                                id="exampleInputEmail1" aria-describedby="emailHelp">
+                            </div>
+
+                            <div class="form-group col-md-6 mt-3">
+                              <label for="exampleInputEmail1">Address</label>
+                              <textarea id="address" class="form-control">{{request.user.profile.address}}</textarea>
+                            </div>
+                          </div>
+
+
+                          <button type="button" onclick="updateProfile()" class="btn btn-primary mt-3">Update</button>
+                      </div>
+
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <form method="post" id="show_upload_form" style="display:none" action="{% url 'upload_image' %}"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn btn-dark">Submit</button>
+              </form>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="card-body">
+            <div class="col-md-12 col-xl-12">
+              <div class="text-center">
+                <div class="card-body text-center">
+                  <img {% if request.user.profile.get_image %} src="{{request.user.profile.get_image}}" {% else %}
+                    src="/media/profile/default.png" {% endif %} class="dcsic_current_img rounded-circle img-fluid"
+                    style="height: 150px; width: 150px;">
+                  <h5 class="card-title mb-0">{{request.user.profile.full_name}}</h5>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+</main>
+
+
+<script>
+  document.getElementById('update_profile_form').addEventListener("click", function (event) {
+    event.preventDefault()
+  });
+</script>
+<script>
+   document.querySelector('.dcsic_file_input').addEventListener('change', function () {
+
+    console.log(document.querySelector('.dcsic_file_input').src)
+
+   })
+
+  var element = document.getElementsByClassName('dcsic_current_img')
+  console.log(element)
+
+  function showForm() {
+    document.getElementById('show_upload_form').style = 'block'
+  }
+</script>
+
+
+<script type="text/javascript" defer>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#blah').attr('src', e.target.result)
+      };
+      reader.readAsDataURL(input.files[0]);
+      setTimeout(initCropper, 1000);
+    }
+  }
+
+  function initCropper() {
+    var image = document.getElementById('blah');
+    var cropper = new Cropper(image, {
+      aspectRatio: 1 / 1,
+      crop: function (e) {
+        console.log(e.detail.x);
+        console.log(e.detail.y);
+      }
+    });
+
+
+    document.getElementById('dcsic_file_input').addEventListener('click', function () {
+      var imgurl = cropper.getCroppedCanvas().toDataURL();
+      var img = document.createElement("img");
+      img.src = imgurl;
+      document.getElementById("cropped_result").appendChild(img);
+
+    })
+  }
+</script>
+
+
+
+
+
+
+
+
+{% endblock %}

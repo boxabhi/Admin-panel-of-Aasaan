@@ -1,0 +1,350 @@
+{% extends "console/base.html"%}
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css"
+    integrity="sha512-UTNP5BXLIptsaj5WdKFrkFov94lDx+eBvbKyoe1YAfjeRPC+gT5kyZ10kOHCfNZqEui1sxmqvodNUx3KbuYI/A=="
+    crossorigin="anonymous" />
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.js"></script>
+
+
+<main class="content bg-white">
+
+    <div class="container-fluid p-0">
+
+
+
+        <div class="container-fluid p-0">
+
+            <div class="row mb-2 mb-xl-3">
+                <div class="col-auto d-none d-sm-block">
+                    <h3>ICICI Universe</h3>
+                </div>
+
+
+            </div>
+
+
+
+            <div class="row bg-white">
+
+
+
+                <div class="col-xl-12 col-xxl-12">
+                    <div class="card flex-fill w-100">
+
+                        <div class=" text-center">
+
+                            
+                            <a href="{% url 'show_hrms' %}" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="Google Keep">
+                            <img class="img-fluid img-thumbnail p-3 m-4 zoom" style="height: 100px;border:none"
+                                src="https://img.apksum.com/92/aa2.network2.hrmsmobileapp2/1.3.29/icon.png">
+
+                        </a>
+
+                            <a href="{% url 'view_gal' %}" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Google Keep">
+                                <img class="img-fluid img-thumbnail p-3 m-4 zoom" style="height: 100px;border:none"
+                                    src="https://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/address-book-icon.png">
+
+                            </a>
+
+
+                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Google Keep">
+                                <img class="img-fluid img-thumbnail p-3 m-4 zoom" style="height: 100px;border:none"
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Google_Keep_icon_%282020%29.svg/1200px-Google_Keep_icon_%282020%29.svg.png">
+
+                            </a>
+                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Google Calendar    ">
+
+                                <img class="img-fluid img-thumbnail p-3  m-4 zoom" style="height: 100px; border:none"
+                                    src="https://i.pinimg.com/originals/6e/09/90/6e099088b3deb805b68d83676af6f067.png">
+
+                            </a>
+                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Gmail">
+
+                                <img class="img-fluid img-thumbnail p-3 m-4 zoom" style="height: 100px; border:none"
+                                    src="https://1000logos.net/wp-content/uploads/2018/05/Gmail-logo.png">
+                            </a>
+                            <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Google Meet">
+
+
+                                <img class="img-fluid img-thumbnail p-3 m-4 zoom" style="height: 100px; border:none"
+                                    src="https://fonts.gstatic.com/s/i/productlogos/meet_2020q4/v1/web-96dp/logo_meet_2020q4_color_2x_web_96dp.png">
+                            </a>
+
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <div class="row">
+                            <div class="col-12 col-lg-8 col-xxl-9 d-flex">
+                                <div class="card flex-fill">
+                                    <div class="card-header bg-white" style="border-bottom: #F99D27 1px solid;" >
+
+                                        <h5 class="card-title h4 mb-0">Latest News</h5>
+                                    </div>
+                                    <table class="table table-hover my-0">
+                                        <thead>
+                                            <tr>
+                                                <th>S. NO</th>
+                                                <th class="d-none d-xl-table-cell">Title</th>
+                                                
+                                                <th>Created at</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for data in news %}
+                                            <tr>
+                                                <td class="text-center">{{forloop.counter}}</td>
+                                                <td class="d-none d-xl-table-cell">
+                                                    <a target="_blank" class="text-dark" href="{% url 'view_news' data.slug %}">
+
+
+                                                        {{data.title}}
+                                                    </a>
+
+                                                </td>
+                                                
+                                                <td>{{data.created_at}}</td>
+
+                                            </tr>
+                                            {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4 col-xxl-3 d-flex">
+                                <div class="card flex-fill w-100">
+                                    <div class="card-header bg-white"  style="border-bottom: #F99D27 1px solid;">
+
+                                        <h5 class="card-title h4 mb-0" style="display: inline;">Today's Birthday 🎂  
+                                            
+                                        </h5>
+
+                                        <span class="text-right">
+
+                                       
+                                            <i class="fas fa-sync text-right"  id="refresh" onclick="refreshBirthdays()" style="color:#F99D27;text-align: right;"></i>
+                                        </span>
+                                        
+
+
+
+                                    </div>
+                                    <div class="card-body  w-100">
+                                        {%  for birthday in birthdays.details %}
+                                        <p>{{forloop.counter}}. {{birthday.EmpName}} birthday today - <b>{{birthday.EmpId}} </b> 🧨🧨</p>
+                                       {% endfor %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+                                <div class="card flex-fill">
+                                    <div class="card-header bg-white"  style="border-bottom: #F99D27 1px solid;" >
+
+                                        <h5 class="card-title h4 mb-0">Impact Box</h5>
+                                    </div>
+                                    <table class="table table-hover my-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="">Beneficiaries</th>
+                                                <th>Total</th>
+                                                <th>Total Males</th>
+                                                <th>Total Females</th>
+                                                <th>This Month Total</th>
+                                                <th>Males</th>
+                                                <th>Females</th>
+                                                <th>This FY Total</th>
+                                                <th>This FY Males</th>
+                                                <th>This FY Females</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="show_batches">
+
+                                            <tr>
+                                                <td class="text-center">
+
+                                                    ISA
+                                                </td>
+                                               
+                                                
+                                               
+
+                                                <td class="text-center"> {{impact_box.isa_total}}  </td>
+                                                <td class="text-center"> {{impact_box.isa_total_males}}  </td>
+                                                <td class="text-center"> {{impact_box.isa_total_females}}  </td>
+                                                <td class="text-center"> {{impact_box.isa_this_month_total}}  </td>
+                                                <td class="text-center"> {{impact_box.isa_males}}  </td>
+                                                <td class="text-center"> {{impact_box.isa_females}}  </td>
+                                                <td class="text-center"> {{impact_box.isa_this_fy_total}}  </td>
+                                                <td class="text-center"> {{impact_box.isa_this_fv_males}}  </td>
+                                                <td class="text-center"> {{impact_box.isa_this_fv_females}}  </td>
+
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+
+                                                    RL
+                                                </td>
+
+                                             <td class="text-center">   {{impact_box.rl_total}} </td>
+                                             <td class="text-center">   {{impact_box.rl_total_males}} </td>
+                                             <td class="text-center">   {{impact_box.rl_total_females}} </td>
+                                             <td class="text-center">   {{impact_box.rl_this_month_total}} </td>
+                                             <td class="text-center">   {{impact_box.rl_males}} </td>
+                                             <td class="text-center">   {{impact_box.rl_females}} </td>
+                                             <td class="text-center">   {{impact_box.rl_this_fy_total}} </td>
+                                             <td class="text-center">   {{impact_box.rl_this_fv_males}} </td>
+                                             <td class="text-center">   {{impact_box.rl_this_fv_females}} </td>
+
+
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">
+                                                    RSETI
+                                                </td>
+
+                                                <td class="text-center">   {{impact_box.rseti_total}} </td>
+                                                <td class="text-center">   {{impact_box.rseti_total_males}} </td>
+                                                <td class="text-center">   {{impact_box.rseti_total_females}} </td>
+                                                <td class="text-center">   {{impact_box.rseti_this_month_total}} </td>
+                                                <td class="text-center">   {{impact_box.rseti_males}} </td>
+                                                <td class="text-center">   {{impact_box.rseti_females}} </td>
+                                                <td class="text-center">   {{impact_box.rseti_this_fy_total}} </td>
+                                                <td class="text-center">   {{impact_box.rseti_this_fv_males}} </td>
+                                                <td class="text-center">   {{impact_box.rseti_this_fv_females}} </td>
+   
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">Total</td>
+                                                <td class="text-center">
+                                                    {{impact_box.get_total}}
+                                                </td>
+
+                                                <td class="text-center">
+                                                    {{impact_box.get_total_males}}
+                                                </td>
+
+                                                <td class="text-center">
+                                                   {{impact_box.get_total_females}}
+                                                </td>
+
+                                                <td class="text-center">
+                                                        {{impact_box.get_total_month_total}}
+                                                </td>
+
+                                                <td class="text-center">{{impact_box.get_total_males_}}</td>
+                                                <td class="text-center">{{impact_box.get_total_females_}}</td>
+                                                <td class="text-center">{{impact_box.get_this_fy_total}}</td>
+                                                <td class="text-center">{{impact_box.get_this_fv_males}}</td>
+                                                <td class="text-center">{{impact_box.get_this_fv_females}}</td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                    <div class="card-header">
+
+                        <h5 class="card-title mb-0">Recent Movement</h5>
+                        <div class="doughnut-chart-container">
+                            <canvas id="doughnut-chartcanvas-1"></canvas>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+    var ctx1 = $("#doughnut-chartcanvas-1");
+    var options = {
+        responsive: true,
+        title: {
+            display: true,
+            position: "top",
+            text: "Doughnut Chart",
+            fontSize: 18,
+            fontColor: "#111"
+        },
+        legend: {
+            display: true,
+            position: "bottom",
+            labels: {
+                fontColor: "#333",
+                fontSize: 16
+            }
+        }
+    };
+    $(function () {
+        var ctx1 = $("#doughnut-chartcanvas-1");
+        var data = "{{data}}"
+        data = JSON.parse(data)
+        var data1 = {
+            labels: ["Sourcing", "Enrollments", "Followups"],
+            datasets: [{
+                label: "Data Chart",
+                data: data,
+                backgroundColor: [
+                    "green",
+                    "#A9A9A9",
+                    "#DC143C",
+
+                ],
+                borderColor: [
+                    "#CDA776",
+                    "#989898",
+                    "#CB252B",
+
+                ],
+                borderWidth: [1, 1, 1, 1, 1]
+            }]
+        };
+        var chart1 = new Chart(ctx1, {
+            type: "doughnut",
+            data: data1,
+            options: options
+        });
+    });
+</script>
+
+
+
+{% endblock %}

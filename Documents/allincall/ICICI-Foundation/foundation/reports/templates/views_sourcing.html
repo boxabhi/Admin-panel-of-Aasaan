@@ -1,0 +1,104 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong>Sourcing </strong> Reports</h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+
+              <a href="{% url 'sourcing' %}" class="btn btn-info mb-4"><i class="fas fa-arrow-left"></i></a>
+
+
+              <div class="text-right mb-4 d-flex">
+                <div class="form-group">
+                  <select class="from-control" id="selected_option">
+                    <option value="1">Send SMS</option>
+                    <option value="2">Refresh</option>
+
+
+                  </select>
+                </div>
+                <div class="pl-3">
+                <button class="btn btn-info" onclick="check(2)">Send </button>
+              </div>
+              </div>
+
+
+              <table id="table_sourcing" class="display">
+                <thead class="thead-white">
+                  <tr>
+                    <th></th>
+
+                    <th scope="col">S. NO</th>
+                    <th scope="col">Full Name</th>
+
+                    <th scope="col">Contact No</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Applicant ID</th>
+
+                    <th scope="col">Centre Name</th>
+                    <th scope="col">Faculty Name</th>
+
+
+                    <th scope="col">SMS Status</th>
+                    <th scope="col">Email Status</th>
+                    <th scope="">Pk</th>
+                  </tr>
+
+                </thead>
+                <tbody>
+                  {% for sourcing  in sourcings %}
+                  <tr>
+                   
+                    <td id="select-box-{{sourcing.pk}}" data-value="{{sourcing.pk}}"> </td>
+                    <td>{{forloop.counter}}</td>
+
+                    <td>{{sourcing.full_name}}</td>
+                    <td>{% if sourcing.contact_no %} {{sourcing.contact_no}} {% else %} - {% endif %} </td>
+                    <td>
+                      {% if sourcing.email %} {{sourcing.email}} {% else %} - {% endif %}
+
+                    </td>
+                    <td scope="col">
+
+                      {{sourcing.get_application_id}} {% if sourcing.get_len_application_id %}<span class="badge badge-success"> <i onclick="show_application_data('{{sourcing.id}}')" class="text-success fas fa-plus-circle"></i> </span>{% endif  %}  
+                      </th>
+
+                    <td> {% if sourcing.centre_name %} {{sourcing.centre_name}} {% else %} - {% endif %} </td>
+                    <td> {% if sourcing.faculty_name %} {{sourcing.faculty_name}} {% else %} - {% endif %} </td>
+
+                    <td>
+                      {{sourcing.sms_status}}</td>
+                    <td>{{sourcing.email_status}}</td>
+
+                    <td>{{sourcing.pk}}</td>
+                  </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!-- <script>
+ EnableSourcing();
+</script> -->
+
+{% endblock %}

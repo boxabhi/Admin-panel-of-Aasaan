@@ -1,0 +1,165 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong>View Placement Partners Enquiry</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+                            <table class="table" id="table_placement" class="display">
+                                <thead class="thead-white">
+                                  <tr>
+                                    <th scope="col">
+                                      <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                    </th>
+                                    <th scope="col">S. NO</th>
+                                    <th scope="col">Name of the company </th>
+                                    <th scope="col">Address detail </th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">State </th>
+                                    <th scope="col">Name of person</th>
+                                    <th scope="col">Designation of person </th>
+                                    <th scope="col">Mobile number</th>
+                
+                                    <th scope="col">Email </th>
+                                    <th scope="col">Type of company </th>
+                                    <td scope="col">Is addressed</td>
+                                    <td scope="col">Remarks</td>
+
+                                    <th scope="col">Created At </th>
+                                    <th scope="col">Action </th>
+
+
+
+                
+                                  </tr>
+                                </thead>
+                                <tbody>
+                
+                                  {% for placement_partners_obj in placement_partners_objs %}
+                
+                                  <tr>
+                                    <td>
+                                      <input type="checkbox" id="checkboxes" >
+                                    </td>
+                                    <td>
+                                        {{forloop.counter}}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.name_of_the_company}}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.address_detail}}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.city}}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.state}}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.name_of_person}}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.designation_of_person}}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.mobile_number}}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.email}}
+
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.type_of_company}}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.is_addressed}}
+                                    </td>
+                                    <td>
+                                        {% if placement_partners_obj.address_remarks %}
+                                        {{placement_partners_obj.address_remarks}}
+                                        {% else %}
+                                            -
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {{placement_partners_obj.created_at}}
+
+                                    </td>
+
+                                    <td>
+                                        <button type="button" {% if placement_partners_obj.is_addressed %}   data-bs-toggle="tooltip" data-bs-placement="top" title="Remark is already added"  class="btn btn-dark"  {% else %} class="btn btn-primary" {%endif %} data-bs-toggle="modal" data-bs-target="#exampleModal-{{placement_partners_obj.id}}">
+                                            <i class="far fa-edit"></i>
+                                          </button>
+                                          
+
+
+                                          <!-- Modal -->
+<div class="modal fade" id="exampleModal-{{placement_partners_obj.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add remarks</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+       
+
+        <div class="modal-body">
+            <label>Is contacted</label>
+            <select class="form-control" id="">
+                <option>Choose</option>
+                <option value="1">Is Contacted</option>
+                <option value="">Is Pending</option>
+    
+            </select>
+            <label>Remarks</label>
+            <textarea id="address_remarks" class="form-control"></textarea>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="savePlacementRemarks('{{placement_partners_obj.id}}')">Save </button>
+        </div>
+      </div>
+    </div>
+  </div>
+                                    </td>
+
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                            
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+<script>
+    $(document).ready(function() {
+    $('#table_placement').DataTable( {
+        "scrollX": true
+    } );
+} );
+</script>
+
+
+{% endblock %}

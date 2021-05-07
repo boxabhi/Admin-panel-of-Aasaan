@@ -1,0 +1,135 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong>Search Trainee</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+                            <form>
+
+                            <div class="row">
+                                <!-- <div class="col-md-2 form-group">
+                                    <label>ISA</label>
+                                    <input type="text" class="form-control" placeholder="Enter isa" name="isa">
+                                </div>
+
+                                <div class="col-md-2 form-group">
+                                    <label>Batch</label>
+                                    <input type="text"class="form-control" placeholder="Enter batch" name="batch">
+                                </div> -->
+
+                                <div class="col-md-2 form-group">
+                                    <label>Name</label>
+                                    <input type="text" type="text" class="form-control" placeholder="Enter name" name="name">
+                                </div>
+
+                                <div class="col-md-2 form-group">
+                                    <label>Mobile </label>
+                                    <input type="text"class="form-control" placeholder="Enter Mobile" name="phone_no">
+                                </div>
+                                <!-- <div class="col-md-2 form-group">
+                                    <label>Enrollment/Application Id </label>
+                                    <input type="text" class="form-control" placeholder="Enter Enrollment/Application id" name="id">
+                                </div>
+
+                                <div class="col-md-2 form-group">
+                                    <label>Course</label>
+                                    <input class="form-control" placeholder="Enter Course" name="course">
+                                </div> -->
+                                </div>
+
+                                
+                                <div class="row mt-3 mb-5">
+
+                               
+<!-- 
+                                <div class="col-md-2 form-group">
+                                    <label>Start Date</label>
+                                    <input class="form-control" type="date" placeholder="Enter start date" name="start_date">
+                                </div>
+
+                                <div class="col-md-2 form-group">
+                                    <label>End Date</label>
+                                    <input class="form-control" type="date" placeholder="Enter end date" name="end_date">
+                                </div> -->
+
+                                <div class="col-md-2 form-group">
+                                    <button type="submit" class="btn btn-info mt-4">Search</button>
+                                </div>
+                              
+
+                            </div>
+                            </form>
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">
+                                            <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                        </th>
+                                        <th scope="col">S. NO</th>
+                                        <th scope="col">ApplicationId </th>
+                                        <th scope="col">PhoneNo </th>
+                                        <th scope="col">ISAId</th>
+                                        <th scope="col">BatchId</th>
+                                        <th scope="col">TraineeName</th>
+                                        <th scope="col">Email </th>
+                                        <th scope="col">DateOfBirth</th>
+                                        <th scope="col">Course</th>
+                                        <th scope="col">TraineeId</th>
+                                        
+                                   
+                                    </tr>
+                                </thead>
+                          
+                                {% for data in datas %}
+                            
+                               
+                                <tbody id="show_batches">
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="checkboxes">
+                                        </td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{data.ApplicationId}}</td>
+                                        <td>{{data.PhoneNo}}</td>
+                                        <td>{{data.ISAId}}</td>
+                                        <td class="text-center">{{data.BatchId}} </td>
+                                        <td>{{data.TraineeName}}</td>
+                                        <td>{{data.Email}}</td>
+                                        <td>
+                                            {{data.DateOfBirth}}
+                                        </td>
+                                        <td>{{data.Course}}</td>
+                                        <td>{{data.TraineeId}}</td>
+                                       
+
+                                        
+                                          
+                                        
+                                      
+
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>  
+
+
+{% endblock %}

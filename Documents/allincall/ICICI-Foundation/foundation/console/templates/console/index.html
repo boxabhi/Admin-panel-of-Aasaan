@@ -1,0 +1,101 @@
+{% extends 'console/base.html' %}
+{% block content %}
+<main class="content">
+
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong>Upload</strong> Reports</h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Upload Reports</h5>
+            </div>
+            <div class="card-body">
+
+                    {% if   request.user.is_authenticated %}
+                      <div class="mx-auto col-md-6">
+                        <label>Select an option</label>
+                        <select id="options" class="form-control" onchange="show_upload()">
+                          <option selected>Choose</option>
+                          <option value="1" {% if option == 1 %} selected {% endif %}> Sourcing </option>
+                          <option value="2" {% if option == 2 %} selected {% endif %}> Follow Ups </option>
+                          <option value="3" {% if option == 3 %} selected {% endif %}> Enrollment </option>
+                        </select>
+
+
+                        <div id="show_upload_box" class="mt-3" style="display: none;">
+                          <a href="#" class="mt-2 pt-3" id="donwload_file_btn">Download sample file</a>
+                          <div class="form-group mt-4">
+                            <label>Upload a File</label>
+                            <input id="fileupload" accept=".xls,.xlsx" type="file" class="form-control">
+                          </div>
+                        </div>
+
+                        <button type="button" id="form_button" class="btn btn-success mt-4 btn-block">
+                          Upload
+                        </button>
+
+
+                      </div>
+                      {% block sourcing %}
+                      {% include "console/options/sourcing.html" %}
+                      {% endblock %}
+
+
+                      {% block followups %}
+                      {% include "console/options/followups.html" %}
+                      {% endblock %}
+
+
+                      {% block enrollment %}
+                      {% include "console/options/enrollment.html" %}
+                      {% endblock %}
+
+                    </div>
+
+
+
+
+
+                    {% endif %}
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+     
+
+    
+
+
+
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Please note down the errors page will be refreshed</h5>
+
+        </div>
+        <div class="modal-body">
+          <div id="errors"></div>
+
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" data-dismiss="modal" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+{% endblock %}

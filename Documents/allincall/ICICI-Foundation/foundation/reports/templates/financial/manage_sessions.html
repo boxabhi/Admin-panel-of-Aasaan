@@ -1,0 +1,106 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Manage Sessions</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+                           
+                             
+                            </div>
+
+                            <div>
+
+                            </div>
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-white">
+                                    <tr>
+                                        <th scope="col">
+                                            <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                        </th>
+                                        <th scope="col">S. NO</th>
+                                        <th scope="col">Program </th>
+                                        <th scope="col">Organization</th>
+                                        <th scope="col">Mode</th>
+
+                                        
+                                        <th scope="col">Nature of participants</th>
+                                        <th scope="col">Start time </th>
+                                        <th scope="col">End time</th>
+                                        <th scope="col">Total males</th>
+                                        <th scope="col">Total Females</th>
+                                        <th scope="col">Total Candidate</th>
+                                        <th scope="col">Download Excel</th>
+
+                                        <th scope="col">Created At</th>
+
+
+
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="show_batches">
+                                    {% for data in financial_sessions %}
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" id="checkboxes">
+                                        </td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{data.program}}</td>
+                                        <td>{{data.organization.name}}</td>
+                                        <td>{{data.mode}}</td>
+                                        <td class="text-center">{{data.nature_of_participants}} </td>
+                                        <td>{{data.start_time}}</td>
+                                        <td>{{data.end_time}}</td>
+                                        <td>
+                                            {{data.total_males}}
+                                        </td>
+                                        <td>
+                                            {{data.total_females}}
+                                        </td>
+                                        <td>
+                                            {{data.total_partipants}}
+                                        </td>
+                                        <td>
+                                            <a href="/media/{{data.excel}}" class="btn btn-info">
+                                                <i class="fas fa-cloud-download-alt"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            {{data.created_at}}
+                                        </td>
+                                        
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                              
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+
+<script>
+
+</script>
+
+
+{% endblock %}

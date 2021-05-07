@@ -1,0 +1,127 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Manage Organization</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+                           
+                               
+
+                            <div>
+
+                            </div>
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-white">
+                                    <tr>
+                                        <th scope="col">
+                                            <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                        </th>
+                                        <th scope="col">S. NO</th>
+                                        <th scope="col">Organization type </th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">State</th>
+
+                                        <th scope="col">District</th>
+
+                                        <th scope="col">City</th>
+                                        <th scope="col">Pincode</th>
+                                        <th scope="col">Contact person</th>
+                                        <th scope="col">Designation</th>
+                                        <th scope="col">Mobile</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">
+
+                                            Status
+                                            
+                                        </th>
+                                        <th scope="col">Created at</th>
+
+
+
+
+                                    </tr>
+                                </thead>
+
+
+                                <tbody id="show_batches">
+                                {% for data in financial_organizations %}
+
+                                    <tr>
+                                        <td>
+
+                                            <input type="checkbox" id="checkboxes">
+
+
+                                        </td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{data.organization_type}}</td>
+                                        <td>{{data.address}}</td>
+                                        <td>{{data.state}}</td>
+                                        <td class="text-center">{{data.district}} </td>
+                                        <td>{{data.city}}</td>
+                                        <td>{{data.pincode}}</td>
+                                        <td>
+                                            {{data.contact_person}}
+                                        </td>
+                                        <td>
+                                            {{data.designation}}
+                                        </td>
+                                        <td>
+                                            {{data.mobile}}
+                                        </td>
+                                        <td>
+                                            {{data.email}}
+                                        </td>
+
+                                        <td class="text-center">
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" {% if data.to_show %} checked  {% endif %} onchange="toggleFinancialOrganization('{{data.id}}')" type="checkbox" id="flexSwitchCheckDefault">
+                                              </div>
+                                        </td>
+                                       
+                                        <td>
+                                            {{data.created_at}}
+                                        </td>
+                                       
+
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                               
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .card-s {
+        border: 1px solid rgb(216, 216, 216);
+        margin: 5px;
+        background-color: rgb(250, 248, 248);
+        -webkit-box-shadow: 9px 23px 34px -36px rgba(168,163,168,1);
+-moz-box-shadow: 9px 23px 34px -36px rgba(168,163,168,1);
+box-shadow: 9px 23px 34px -36px rgba(168,163,168,1);
+
+
+    }
+</style>
+
+
+{% endblock %}

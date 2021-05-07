@@ -1,0 +1,132 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Show Assign followups - </strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+
+                  
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-white">
+                                    <tr>
+                                        <th scope="col">
+                                            <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                        </th>
+                                        <th scope="col">S. NO</th>
+                                        <th scope="col">TraineeId </th>
+                                        <th scope="col">TraineeName</th>
+                                        <th scope="col">Application Id</th>
+
+                                        <th scope="col">Batch Start Date</th>
+                                        <th scope="col">Batch End Date</th>
+                                        <th>Is Follow Up done</th>
+                                        <th>Created At</th>
+                                   
+                                    </tr>
+                                </thead>
+
+                                {% for data in datas %}
+                                <tbody id="show_batches">
+                                    <tr>
+                                        <td>
+                                      
+                                            <input type="checkbox" id="checkboxes" 
+                                            data-trainee_id="{{data.TraineeId}}" 
+                                            data-trainee_name="{{data.TraineeName}}"
+                                            data-batch_id="{{data.BatchId}}"
+                                            data-batch_start_date= "{{data.BatchStartDate}}"
+                                            data-batch_end_date= "{{data.BatchEndDate}}"
+                                            data-applicant_id= "{{data.ApplicantId}}"
+                                            >
+
+
+                                        </td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{data.trainee_id}}</td>
+                                        <td>{{data.trainee_name}}</td>
+                                        <td>{{data.application_id}}</td>
+
+                                       
+                                        
+                                        <td>{{data.batch_start_date}}</td>
+                                        <td>{{data.batch_end_date}}</td>
+                                        <td class="text-center">
+                                            {%  if data.is_follow_up_done %}
+                                            <i class="far fa-check-square text-success"></i>
+                                            {% else %}
+                                            <i class="fas fa-times text-danger"></i>
+                                            {% endif %}
+                                        </td>
+
+                                        <td>
+                                            {{data.created_at|date:'d-M-Y g:H A'}}
+                                        </td>
+                                      
+
+                                    </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="modal fade" id="assignFollowups" tabindex="-1" aria-labelledby="assignFollowupsLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Manage Trainee</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-3">
+        
+            <div class="row">
+                <div class="col-md-12 mt-2">
+                    <label>Follow up title</label>
+                    <input type="text"  id="follow_up_title" class="form-control" placeholder="Follow up title">
+                </div>
+                <div class="col-md-12 mt-3">
+                    <label>Follow up deadline</label>
+                    <input type="date" id="follow_up_deadline" class="form-control" placeholder="">
+                </div>
+
+                <div class="col-md-12 mt-3">    
+                    <label>Select user</label>
+                    <select class="form-control" id="assign_to_user">
+                        <option >Choose</option>
+                        {% for user in users %}
+                        <option value="{{user.id}}">{{user.email}}</option>
+
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="assignFollowups()" class="btn btn-warning">Assign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}

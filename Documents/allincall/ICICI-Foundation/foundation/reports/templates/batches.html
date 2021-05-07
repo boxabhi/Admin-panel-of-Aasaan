@@ -1,0 +1,329 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong> Batches</strong></h3>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">
+
+
+              <div class="row mb-4">
+                <div class="col-md-4">
+                  <form method="get">
+                    <input type="text" name="emp_id" class="form-control" value="C819" placeholder="Enter Emp-Id"
+                      id="emp_id">
+                    <br>
+                    <button class="btn btn-success mt-2 mb-4" id="get_batches" type="submit">Get Batches</button>
+
+                  </form>
+                </div>
+                <div class="col-md-6">
+                  <div class="text-right  mb-3">
+                    <button class="btn btn-primary" onclick="importBatches()">Import</button>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center">
+                <h3 id="small_text"></h3>
+
+              </div>
+
+
+
+
+              <table class="table table-striped" id="table_enrollments" class="display">
+                <thead class="thead-white">
+                  <tr>
+                    <th scope="col">
+                      <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                    </th>
+                    <th scope="col">S. NO</th>
+                    <th scope="col">Batch ID</th>
+                    <th scope="col">Batch Name</th>
+
+                    <th scope="col">ISA name</th>
+                    <th scope="col">Course Id</th>
+                    <th scope="col">Batch Start Date</th>
+                    <th scope="col">Batch End Date</th>
+                    <th scope="col">No. of Students</th>
+
+
+                    <th scope="col">Is Imported</th>
+
+                    <th scope="col"> Action</th>
+                  </tr>
+                </thead>
+                <tbody id="show_batches">
+                  {% for data in datas %}
+                  <tr>
+                    <td>
+                      <input type="checkbox" id="checkboxes" data-batchStartDate="{{data.BatchStartDate}}"
+                        data-batch="{{data.BatchId}}" data-emp_id="{{data.EmpId}}"
+                        data-batchEndDate="{{data.BatchEndDate}}">
+                    </td>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{data.BatchId}}</td>
+                    <td>{{data.BatchName}}</td>
+
+                    <td>{{data.ISAName}}</td>
+                    <td>{{data.Course}}</td>
+                    <td>{{data.BatchStartDate}}</td>
+                    <td>{{data.BatchEndDate}}</td>
+                    <td class="text-center">{{data.students}}</td>
+
+
+
+
+                    <td class="text-center">
+                      {% if data.is_stored %}
+                      <i class="far fa-check-square text-success"></i>
+                      {% else%}
+                      <i class="fas fa-times text-danger"></i>
+                      {% endif %}
+
+                    </td>
+                    <td>
+                      <a href="{% url 'students' data.BatchId %}" target="_blank" style="color: rgb(199, 58, 58);"><i
+                          class="fas fa-external-link-alt"></i></button>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<div class="modal fade" id="showProgress" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Batches Imported</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="current_count_in_text"></p>
+
+        <div class="progress">
+          <div class="progress-bar  bg-success progress-bar-striped progress-bar-animated" role="progressbar"
+            aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+
+
+</script>
+
+
+<style>
+ 
+  .table {
+    border-spacing: 0 0.85rem !important;
+  }
+
+  .table .dropdown {
+    display: inline-block;
+  }
+
+  .table td,
+  .table th {
+    vertical-align: middle;
+    margin-bottom: 10px;
+    border: none;
+  }
+
+  .table thead tr,
+  .table thead th {
+    border: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: transparent;
+  }
+
+  .table td {
+    background: #fff;
+  }
+
+  .table td:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .table td:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .avatar {
+    width: 2.75rem;
+    height: 2.75rem;
+    line-height: 3rem;
+    border-radius: 50%;
+    display: inline-block;
+    background: transparent;
+    position: relative;
+    text-align: center;
+    color: #868e96;
+    font-weight: 700;
+    vertical-align: bottom;
+    font-size: 1rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .avatar-sm {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 0.83333rem;
+    line-height: 1.5;
+  }
+
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+  }
+
+  .avatar-blue {
+    background-color: #c8d9f1;
+    color: #467fcf;
+  }
+
+  /* table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,
+  table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before {
+    top: 28px;
+    left: 14px;
+    border: none;
+    box-shadow: none;
+  } */
+/* 
+  table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child,
+  table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child {
+    padding-left: 48px;
+  } */
+
+  table.dataTable>tbody>tr.child ul.dtr-details {
+    width: 100%;
+  }
+
+  table.dataTable>tbody>tr.child span.dtr-title {
+    min-width: 50%;
+  }
+
+  /* table.dataTable.dtr-inline.collapsed>tbody>tr>td.child,
+  table.dataTable.dtr-inline.collapsed>tbody>tr>th.child,
+  table.dataTable.dtr-inline.collapsed>tbody>tr>td.dataTables_empty {
+    padding: 0.75rem 1rem 0.125rem;
+  } */
+
+  /* div.dataTables_wrapper div.dataTables_length label,
+  div.dataTables_wrapper div.dataTables_filter label {
+    margin-bottom: 0;
+  } */
+
+  @media (max-width: 767px) {
+    div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+      -ms-flex-pack: center !important;
+      justify-content: center !important;
+      margin-top: 1rem;
+    }
+  }
+
+  .btn-icon {
+    background: #fff;
+  }
+
+  .btn-icon .bx {
+    font-size: 20px;
+  }
+
+  .btn .bx {
+    vertical-align: middle;
+    font-size: 20px;
+  }
+
+  .dropdown-menu {
+    padding: 0.25rem 0;
+  }
+
+  .dropdown-item {
+    padding: 0.5rem 1rem;
+  }
+
+  .badge {
+    padding: 0.5em 0.75em;
+  }
+
+  .badge-success-alt {
+    background-color: #d7f2c2;
+    color: #7bd235;
+  }
+
+  .table a {
+    color: #212529;
+  }
+
+  .table a:hover,
+  .table a:focus {
+    text-decoration: none;
+  }
+
+  table.dataTable {
+    margin-top: 12px !important;
+  }
+
+  .icon>.bx {
+    display: block;
+    min-width: 1.5em;
+    min-height: 1.5em;
+    text-align: center;
+    font-size: 1.0625rem;
+  }
+
+  .btn {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .avatar-blue {
+    background-color: #c8d9f1;
+    color: #467fcf;
+  }
+
+  .avatar-pink {
+    background-color: #fcd3e1;
+    color: #f66d9b;
+  }
+</style>
+
+{% endblock %}

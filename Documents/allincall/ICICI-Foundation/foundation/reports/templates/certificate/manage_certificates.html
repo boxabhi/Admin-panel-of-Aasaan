@@ -1,0 +1,89 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+    <div class="container-fluid p-0">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-none d-sm-block">
+                <h3><strong> Manage Ceritificate templates</strong></h3>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                        </div>
+                        <div class="card-body">
+
+                            <div>
+
+                            </div>
+                            <table class="table" id="table_enrollments" class="display">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th scope="col">
+                                            <input id="checkbox" type="checkbox" onchange="checkBoxStatus()">
+                                        </th>
+                                        <th scope="col">S. NO</th>
+                                        <th scope="col">Template name </th>
+                                        <th scope="col">Created at</th>
+                                        <th scope="col">Action</th>
+
+
+
+                                    </tr>
+                                </thead>
+
+
+                                <tbody id="show_batches">
+                                {% for data in ceritificates %}
+
+                                    <tr>
+                                        <td>
+
+                                            <input type="checkbox" id="checkboxes">
+
+
+                                        </td>
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{data.template_name}}</td>
+                                        <td>{{data.created_at}}</td>
+                                        <td>
+                                            <a href="{% url 'update_certificate_template' data.id %}" class="btn btn-info"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="{% url  'show_certificate_template' data.id %}" target="_blank" class="btn btn-success"><i class="fas fa-eye"></i></a>
+                                            <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                        
+                                       
+                                       
+
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                               
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+    .card-s {
+        border: 1px solid rgb(216, 216, 216);
+        margin: 5px;
+        background-color: rgb(250, 248, 248);
+        -webkit-box-shadow: 9px 23px 34px -36px rgba(168,163,168,1);
+-moz-box-shadow: 9px 23px 34px -36px rgba(168,163,168,1);
+box-shadow: 9px 23px 34px -36px rgba(168,163,168,1);
+
+
+    }
+</style>
+
+
+{% endblock %}

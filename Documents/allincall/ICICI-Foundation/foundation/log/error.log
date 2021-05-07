@@ -1,0 +1,47 @@
+[30-Mar-2021 14:16:59] ERROR [views.py:153] LoginAPI Incorrect password at 147
+[31-Mar-2021 11:22:03] ERROR [utils_api.py:564] GetUpcomingBatchList (2003, "Can't connect to MySQL server on '103.35.164.243' ([Errno 101] Network is unreachable)") at 550
+[31-Mar-2021 11:23:27] ERROR [utils_api.py:564] GetUpcomingBatchList (2003, "Can't connect to MySQL server on '103.35.164.243' ([Errno 101] Network is unreachable)") at 550
+[31-Mar-2021 11:47:55] ERROR [utils_api.py:569] GetUpcomingBatchList (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'2020-10-02" and BatchStartDate <= "2021-03-31"\' at line 1') at 560
+[31-Mar-2021 11:48:33] ERROR [utils_api.py:569] GetUpcomingBatchList (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'2020-10-02" and BatchStartDate <= "2021-03-31"\' at line 1') at 560
+[31-Mar-2021 11:49:09] ERROR [utils_api.py:569] GetUpcomingBatchList (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'2020-10-02" and BatchStartDate <= "2021-03-31"\' at line 1') at 560
+[31-Mar-2021 13:22:30] ERROR [views.py:154] LoginAPI Incorrect password at 147
+[31-Mar-2021 13:46:56] ERROR [views.py:154] LoginAPI Incorrect password at 147
+[31-Mar-2021 13:48:32] ERROR [views.py:154] LoginAPI Username not found at 134
+[02-Apr-2021 17:18:58] ERROR [views.py:154] LoginAPI 'AnonymousUser' object has no attribute '_meta' at 85
+[02-Apr-2021 17:19:13] ERROR [views.py:154] LoginAPI 'AnonymousUser' object has no attribute '_meta' at 85
+[02-Apr-2021 17:19:40] ERROR [views.py:154] LoginAPI 'AnonymousUser' object has no attribute '_meta' at 85
+[15-Apr-2021 12:38:14] ERROR [views.py:153] LoginAPI 'AnonymousUser' object has no attribute '_meta' at 85
+[15-Apr-2021 12:38:39] ERROR [views.py:153] LoginAPI 'AnonymousUser' object has no attribute '_meta' at 85
+[17-Apr-2021 15:43:36] ERROR [utils_api.py:631] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.TraineeId' in 'field list'") at 623
+[17-Apr-2021 15:43:39] ERROR [utils_api.py:631] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.TraineeId' in 'field list'") at 623
+[17-Apr-2021 15:44:09] ERROR [utils_api.py:631] GetUpcomingBatchList (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM l7_traineeapplications \n        LEFT JOIN\n        l7_enrldtraineeapplicatio' at line 11") at 623
+[17-Apr-2021 15:45:03] ERROR [utils_api.py:631] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.TraineeId' in 'field list'") at 623
+[17-Apr-2021 15:45:30] ERROR [utils_api.py:631] GetUpcomingBatchList (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM l7_traineeapplications \n        LEFT JOIN\n        l7_enrldtraineeapplicatio' at line 11") at 623
+[17-Apr-2021 15:46:36] ERROR [utils_api.py:631] GetUpcomingBatchList (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM l7_traineeapplications \n        LEFT JOIN\n        l7_enrldtraineeapplicatio' at line 11") at 623
+[17-Apr-2021 15:47:54] ERROR [utils_api.py:631] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.TraineeId' in 'field list'") at 623
+[17-Apr-2021 15:50:51] ERROR [utils_api.py:643] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.TraineeId' in 'field list'") at 635
+[17-Apr-2021 15:51:12] ERROR [utils_api.py:642] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.TraineeId' in 'field list'") at 634
+[17-Apr-2021 15:51:47] ERROR [utils_api.py:642] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.Course' in 'field list'") at 634
+[17-Apr-2021 15:52:25] ERROR [utils_api.py:642] GetUpcomingBatchList (1054, "Unknown column 'l7_enrldtraineeapplication.DateOfBirth' in 'field list'") at 634
+[17-Apr-2021 15:52:41] ERROR [utils_api.py:642] GetUpcomingBatchList (1054, "Unknown column 'l7_enrldtraineeapplication.Email' in 'field list'") at 634
+[17-Apr-2021 15:53:05] ERROR [utils_api.py:642] GetUpcomingBatchList (1054, "Unknown column 'l7_enrldtraineeapplication.Email' in 'field list'") at 634
+[17-Apr-2021 15:57:57] ERROR [utils_api.py:643] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.Course' in 'field list'") at 635
+[17-Apr-2021 15:58:00] ERROR [utils_api.py:643] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.Course' in 'field list'") at 635
+[17-Apr-2021 16:02:30] ERROR [utils_api.py:643] GetUpcomingBatchList (1054, "Unknown column 'l7_traineeapplications.TraineeId' in 'field list'") at 635
+[19-Apr-2021 16:13:16] ERROR [utils_api.py:444] GetTraineeInBatch (2003, "Can't connect to MySQL server on '103.35.164.243' ([Errno 101] Network is unreachable)") at 432
+[29-Apr-2021 13:14:59] ERROR [utils_api.py:671] get_gal_data (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '%Rajkumar% OR %Rajkumar%' at line 1") at 662
+[29-Apr-2021 13:16:38] ERROR [utils_api.py:671] get_gal_data (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'LIKE "%Rajkumar%" OR  EmpId = LIKE  "%Rajkumar%"\' at line 1') at 662
+[30-Apr-2021 10:59:18] ERROR [utils_api.py:671] get_gal_data (1066, "Not unique table/alias: 'masterstaff'") at 662
+[30-Apr-2021 11:02:48] ERROR [utils_api.py:671] get_gal_data (1146, "Table 'skillacademy_hierarchy.masterstaff1' doesn't exist") at 662
+[30-Apr-2021 11:03:22] ERROR [utils_api.py:671] get_gal_data (1146, "Table 'skillacademy_hierarchy.masterstaff1' doesn't exist") at 662
+[30-Apr-2021 11:09:46] ERROR [utils_api.py:671] get_gal_data (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'INNER JOIN masterstaff AS masterstaff2  ON masterstaff1.ReportingEmpId = masters' at line 1") at 662
+[30-Apr-2021 11:12:35] ERROR [utils_api.py:673] get_gal_data (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'WHERE EmpId  LIKE "%C15%"  LIMIT 30\' at line 1') at 664
+[30-Apr-2021 11:12:40] ERROR [utils_api.py:673] get_gal_data (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'WHERE EmpId  LIKE "%c16%"  LIMIT 30\' at line 1') at 664
+[30-Apr-2021 11:13:02] ERROR [utils_api.py:673] get_gal_data (1052, "Column 'EmpId' in where clause is ambiguous") at 664
+[30-Apr-2021 11:17:11] ERROR [utils_api.py:677] get_gal_data (1054, "Unknown column 'masterstaff1.Name' in 'where clause'") at 668
+[30-Apr-2021 11:17:49] ERROR [utils_api.py:677] get_gal_data (1054, "Unknown column 'masterstaff1.Name' in 'where clause'") at 668
+[30-Apr-2021 15:39:33] ERROR [utils_api.py:677] get_gal_data (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select EmailID as masterstaff2.   ON masterstaff1.EmpId = masterstaff2.Reporting' at line 1") at 668
+[30-Apr-2021 15:40:12] ERROR [utils_api.py:677] get_gal_data (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select masterstaff2.EmailID as .   ON masterstaff1.EmpId = masterstaff2.Reportin' at line 1") at 668
+[30-Apr-2021 16:05:30] ERROR [utils_api.py:690] get_gal_data (1066, "Not unique table/alias: 'e'") at 681
+[30-Apr-2021 16:15:45] ERROR [utils_api.py:690] get_gal_data (1066, "Not unique table/alias: 'e'") at 681
+[30-Apr-2021 16:16:07] ERROR [utils_api.py:690] get_gal_data (1054, "Unknown column 'm.Email' in 'field list'") at 681

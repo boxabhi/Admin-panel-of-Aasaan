@@ -1,0 +1,1405 @@
+{% extends "base.html" %}
+{% block start %}
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<div class="parallax">
+</div>
+
+<style>
+  .nav-link,
+  .active {
+    border: none;
+
+  }
+</style>
+
+
+
+<div class="container mt-5 mb-5">
+  <h1 class="text-center mb-2">Our Placement partners</h1>
+  <div class="mt-5">
+
+    <img class="img-fluid " style="height:30px;"
+      src="https://www.getcogno.ai/static/CognoAIApp/assets/images/companies/sbi.svg">
+
+    <img class="img-fluid " style="height:30px;"
+      src="https://www.getcogno.ai/static/CognoAIApp/assets/images/companies/kotak.svg">
+
+
+    <img class="img-fluid " style="height:30px;"
+      src="https://www.getcogno.ai/static/CognoAIApp/assets/images/companies/icici.svg">
+
+
+    <img class="img-fluid " style="height:40px;"
+      src="https://www.getcogno.ai/static/CognoAIApp/assets/images/companies/sbilife.svg">
+    <img class="img-fluid " style="height:40px;"
+      src="https://www.getcogno.ai/static/CognoAIApp/assets/images/companies/kotaklife.svg">
+
+    <img class="img-fluid " style="height:40px;"
+      src="https://www.getcogno.ai/static/CognoAIApp/assets/images/companies/sbigli.jpg">
+    <img class="img-fluid " style="height:40px;"
+      src="https://www.getcogno.ai/static/CognoAIApp/assets/images/companies/abc.jpg">
+
+    <img class="img-fluid " style="height:40px;"
+      src="https://www.getcogno.ai/static/CognoAIApp/assets/images/companies/dhani.png">
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="form-body container-fluid bg-white">
+  <div class="multitab-form-area">
+    <div class="tab-links-area">
+
+      <hr>
+      <ul style="font-size:24px !important">
+        <li><a data-toggle="formtab" href="#userProfile" {% if not checked %} class="active" {% endif %}>Register as a
+            Placement Partner</a></li>
+        <li><a data-toggle="formtab" onclick="scrollBottom()" href="#userProfile">Testimonials</a></li>
+        <li><a data-toggle="formtab" href="#residentailAddress">Post Job Requirements</a></li>
+        <li><a data-toggle="formtab" href="#jobDetails" {% if checked %} class="active" {%endif %}>Find Trainee
+            Convocation Details</a></li>
+
+
+        <li><a data-toggle="formtab" href="#jobDescription">Contact Us</a></li>
+
+      </ul>
+    </div>
+    <div class="tab-form-area ml-5">
+      <div class="tabs-panels {% if not checked %} active {% endif %}" id="userProfile">
+        <div class="tab-part">
+          <h4>Register as a placement partner </h4>
+          <hr>
+          <div class="devider-row">
+
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Name of the company</label>
+                    <input type="text" class="form-control" placeholder="Name of the company" id="name_of_company"
+                      aria-describedby="emailHelp">
+                  </div>
+                </div>
+                <div class="col-md-6 form-group">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Address</label>
+                    <input type="text" class="form-control" placeholder="Name of the address" id="address"
+                      aria-describedby="emailHelp">
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">City</label>
+                    <input type="text" class="form-control" placeholder="City" id="city" aria-describedby="emailHelp">
+                  </div>
+                </div>
+
+                <div class="col-md-6 form-group">
+
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">State</label>
+                    <input type="text" class="form-control" placeholder="State" id="state" aria-describedby="emailHelp">
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 form-group">
+
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Name of contact person</label>
+                    <input type="text" class="form-control" placeholder="Name of contact person" id="name_of_person"
+                      aria-describedby="emailHelp">
+                  </div>
+                </div>
+                <div class="col-md-6 form-group">
+
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Designation of contact person</label>
+                    <input type="text" class="form-control" placeholder="Designation of contact person" id="designation"
+                      aria-describedby="emailHelp">
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Mobile number</label>
+                      <input type="mobile" onchange="sendOtp()" placeholder="Mobile number" class="form-control"
+                        id="mobile" aria-describedby="emailHelp">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6 form-group">
+
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Email of person</label>
+                      <input type="email" class="form-control" placeholder="Email of person" id="email"
+                        aria-describedby="emailHelp">
+                    </div>
+
+                  </div>
+                </div>
+                <div class="row" id="show_otp" style="display: none">
+                  <div class="col-md-6" id="otp_input" style="display: ;">
+                    <div class="mb-3">
+                      <label>Enter OTP</label>
+                      <input type="text" placeholder="Enter OTP" class="form-control" id="otp">
+                      <small>An OTP is sent to your mobile number</small>
+                    </div>
+                  </div>
+
+                  <div class="col-md-2 mt-4">
+                    <button class="btn btn-info" style="margin-top: 18px!important">Verify</button>
+                  </div>
+                </div>
+
+
+
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Type of company</label>
+                  <select class="form-control" id="company_type" onchange="showOthers()">
+                    <option value="BFSI">BFSI</option>
+                    <option value="Manufacturing">Manufacturing</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Ecommerce">Ecommerce</option>
+                    <option value="Services">Services</option>
+
+                  </select>
+                </div>
+
+
+                <div class="mb-3" id="others_div" style="display:none">
+                  <label>Please mention</label>
+                  <input class="form-control" id="others" value=" ">
+
+                </div>
+
+
+              </div>
+
+              <button type="submit" class="btn btn-primary" onclick="savePlacementPartners()">Submit</button>
+
+            </div>
+
+          </div>
+        </div>
+        <div class="next-btn">
+          <a data-toggle="formtab" href="#residentailAddress">Next</a>
+        </div>
+      </div>
+      <div class="tabs-panels {% if checked %} active {% endif %}" id="jobDetails">
+        <div class="tab-part">
+          <h4> See Upcoming Batches</h4>
+          <hr>
+         
+          <form method="get" class="mt-5" id="form">
+
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label>Select ISA Academy</label>
+                <select class="form-control" name="isa_id" id="isa_id" onchange="populateCourses()">
+                  <option>Choose</option>
+                  {% for isa in isa_id_list %}
+                  <option {% if isa_id == isa.isa_code %} selected {% endif %} value="{{isa.isa_code}}">{{isa.ISAName}}
+                  </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-4 form-group">
+                <label>Select Course <span id="show_count_course"></span></label>
+                <select class="form-control" name="course_id" id="course_id" name="isa_academy">
+                  <option value="-1">All </option>
+                </select>
+              </div>
+              <div class="col-md-4 form-group">
+                <label>See Batches for </label>
+                <select class="form-control" name="filter_days" id="filter_days" onchange="showCustomDateFilter()">
+                  <option>Choose</option>
+                  <option {% if filter_days ==  'next_1_months' %} selected {% endif %} value="next_1_months">Next 1
+                    month</option>
+                  <option {% if filter_days ==  'next_2_months' %} selected {% endif %} value="next_2_months">Next 2
+                    month</option>
+                  <option {% if filter_days ==  'next_3_months' %} selected {% endif %} value="next_3_months">Next 3
+                    month</option>
+                  <option {% if filter_days ==  'next_6_months' %} selected {% endif %} value="next_6_months">Next 6
+                    month</option>
+                  <option {% if filter_days ==  'custom_date' %} selected {% endif %} value="custom_date">Custom date
+                    range</option>
+                </select>
+              </div>
+              <div class="col-md-8 mt-3">
+                <div class="row" id="custom_date_filter" style="display: none;">
+                  <div class="col-md-6">
+                    <label>Select Start Date</label>
+                    <input type="date" value="{{batch_start_from_date}}" id="batch_start_from_date" name="start_date"
+                      class="form-control">
+                  </div>
+                  <div class="col-md-6">
+                    <label>Select End Date</label>
+                    <input type="date" value="{{batch_start_to_date}}" id="batch_start_to_date" name="end_date"
+                      class="form-control">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 form-group" style="margin-top: 15px;">
+                <button class="btn btn-primary  mt-4" style="margin-top: 45px;">Search</button>
+              </div>
+            </div>
+
+          </form>
+
+
+
+
+          <div class="mt-4">
+            {% if searched %}
+            <p id="not_found">No Batches found</p>
+            {% endif %}
+
+            <!-- <h4 class="mb-4"><b>All Bathces of - </b> Jaipur</h4> -->
+            <div class="text-center" id="spinner" style="display: none;">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+
+            {% if courses %}
+
+            <table class="table table-striped table-hover bg-white mb-5 pb-5" id="table_id">
+              <thead>
+                <tr>
+                  <th scope="col">S. NO</th>
+                  <th scope="col">Batch name</th>
+                  <th scope="col">Batch Id</th>
+                  <th scope="col">Batch Capacity</th>
+                  <th scope="col">Course</th>
+                  <th scope="col">ISA Name</th>
+                  <th scope="col">Shift</th>
+
+                  <th scope="col">Batch Start Date</th>
+                  <th scope="col">Batch End Date</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                {% for course in courses %}
+
+                <tr>
+                  <th scope="row">{{forloop.counter}}</th>
+                  <td>{{course.BatchName}}</td>
+                  <td>{{course.BatchId}}</td>
+                  <td class="text-center">{{course.BatchCapacity}}</td>
+                  <td>{{course.Course}}</td>
+                  <td>{{course.ISAName}}</td>
+                  <td>{{course.Shift}}</td>
+                  <td>{{course.BatchStartDate}}</td>
+                  <td>{{course.BatchEndDate}}</td>
+                </tr>
+                {% endfor %}
+
+
+              </tbody>
+            </table>
+            {% endif %}
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="tabs-panels " id="residentailAddress">
+        <div class="tab-part">
+          <h4>Post Job Requirements</h4>
+          <hr>
+
+          <div class="container" style="width: 100%;">
+            <div class="row">
+              <div class="col-md-6 form-group">
+
+                <label>Name of company</label>
+                <input placeholder="Name of company" class="form-control" id="name_of_company-1">
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label for="exampleInputEmail1" class="form-label">Isa Academy</label>
+                <select class="form-control" id="isa_academy">
+                  <option> Choose</option>
+                  {% for isa in isa_academy %}
+                  <option value="{{isa.ISAName}}">{{isa.ISAName}}</option>
+
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Course</label>
+                <input placeholder="Course" class="form-control" id="course">
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Designation</label>
+                <input placeholder="Designation" class="form-control" id="designation-1">
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Salary</label>
+                <input placeholder="Salary" class="form-control" id="salary">
+              </div>
+              <div class="col-md-6 form-group">
+                <label>Contact person</label>
+                <input class="form-control" id="contact_person">
+              </div>
+            </div>
+
+
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Job text</label>
+                <input placeholder="Job text" class="form-control" id="job_text">
+              </div>
+              <div class="col-md-6 form-group">
+                <label>No of opening</label>
+                <input placeholder="No. of openings" class="form-control" id="no_of_opening">
+              </div>
+            </div>
+
+
+            <button class="btn btn-primary mt-4" onclick="createInterview()">Submit</button>
+
+          </div>
+
+
+        </div>
+        <div class="next-btn">
+          <a data-toggle="formtab" href="#jobDescription">Next</a>
+        </div>
+      </div>
+      <div class="tabs-panels" id="jobDescription">
+        <div class="tab-part">
+          <h4>Contact Us</h4>
+          <hr>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Your name</label>
+
+                <input class="form-control" placeholder="Your name" type="text" id="contact_form_name">
+
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Name of the Company</label>
+
+                <input class="form-control" placeholder="Name of the company" type="text" id="contact_name_of_compnay">
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Pincode</label>
+                <input class="form-control" placeholder="Pincode" type="text" id="contact_pincode">
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Mobile number</label>
+                <input class="form-control" placeholder="Mobile number" type="text" id="contact_mobile_number">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 form-group">
+                <label>Email</label>
+                <input class="form-control" placeholder="Enter email" type="email" id="contact_pincode">
+              </div>
+
+              <div class="col-md-6 form-group">
+                <label>Query</label>
+                <textarea class="form-control" id="contact_query"></textarea>
+
+              </div>
+            </div>
+
+            <button class="btn btn-primary">Submit</button>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<h3 class="text-center mb-5 mt-5">Our Testimonials</h3>
+
+<div class="sd_master_wrapper">
+  <div class="sdtestBg2"></div>
+  <div class="sdtestBg3"></div>
+  <div class="slideshow">
+
+    <div class="content">
+      <!-- slide 1 -->
+      <div class="thumbnail">
+        <img src="https://farsighttechnologies.com/wp-content/uploads/2020/09/AC.jpg">
+      </div>
+      <div class="btnNtxt">
+        <div class="sdAllContent">
+
+          <div class="sd_scroll">
+            <h1 class="sdCustomSliderHeadig">A wonderful, user-friendly HR solution! Farsight HR Solution helped us
+              implement ESS (Employee Self Service) portal for our large enterprise, which made both employees and Human
+              Resources more productive. User-oriented interface and professional team.</h1>
+          </div>
+          <p class="SdClientName">Vice President</p>
+          <p class="SdClientDesc">CPF India</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- slide 2 -->
+      <div class="thumbnail">
+        <img src="https://farsighttechnologies.com/wp-content/uploads/2020/09/MS.jpg">
+      </div>
+      <div class="btnNtxt">
+        <div class="sdAllContent">
+
+          <div class="sd_scroll">
+            <h1 class="sdCustomSliderHeadig">For us, Farsight has become much more than a software solution provider.
+              Farsight has been our helping hand with implementing business automation. The team's expertise, skill, and
+              commitment to excellence are what makes them so great.</h1>
+          </div>
+          <p class="SdClientName">Head IT</p>
+          <p class="SdClientDesc">Mushahi Auto Parts</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- slide 3 -->
+      <div class="thumbnail">
+        <img src="https://farsighttechnologies.com/wp-content/uploads/2020/09/RR.jpg">
+      </div>
+      <div class="btnNtxt">
+        <div class="sdAllContent">
+
+          <div class="sd_scroll">
+            <h1 class="sdCustomSliderHeadig">I would like to place on record my sincere appreciation for helping us to
+              automate the Salary Revision Exercise and also the Leave Management System at Schneider Electric India. We
+              have had huge challenges in the past to manage these 2 complex exercises and it was a nightmare for HR
+              every March/April. However when we engaged you and worked closely to develop a Software Tool customised
+              for Schneider Electric, our lives have become very much easy. What used to be a pain for us became a huge
+              gain for HR Shared Services.</h1>
+          </div>
+          <p class="SdClientName">Vice President – India HR Services</p>
+          <p class="SdClientDesc">Schneider Electric</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <!-- slide 4 -->
+      <div class="thumbnail">
+        <img src="https://farsighttechnologies.com/wp-content/uploads/2020/12/testimonial.png">
+      </div>
+      <div class="btnNtxt">
+        <div class="sdAllContent">
+          <div class="sd_scroll">
+            <h1 class="sdCustomSliderHeadig">With Farsight’s Employee Self Service Portal, our Vision of implementing an
+              HR Software in Honda R&D (India) could be realized for the easy and smooth functioning of operations.
+              Processes and Policies were well understood by the Team and extended a solution in the System, we look
+              forward for more such customizations where customer is always given a priority. We wish them success for
+              all the future endeavors. </h1>
+          </div>
+          <p class="SdClientName">General Manager – Administration Head</p>
+          <p class="SdClientDesc">Honda R&D (India) Pvt. Ltd. </p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+<div class="spacer"></div>
+
+
+
+
+<script>
+  jQuery(document).ready(function ($) {
+    var $slickElement = $('.slideshow');
+
+    $slickElement.slick({
+      autoplay: true,
+      dots: false,
+    });
+
+  });
+</script>
+
+
+
+<style>
+  /* spacer */
+  .spacer {
+    height: 150px;
+    width: 100%;
+  }
+
+  .spacer2 {
+    height: 20px;
+    width: 100%;
+  }
+
+  /* spacer ends */
+
+  /* slider styles */
+  .sd_master_wrapper {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 10px;
+    z-index: 9999;
+  }
+
+  .sdtestBg3 {
+    height: 100%;
+    width: 80%;
+    background: #fff;
+    position: absolute;
+    bottom: -40px;
+    left: 10%;
+    border-radius: 20px;
+    box-shadow: 0px 18px 52.8537px rgb(215 228 249 / 50%);
+    z-index: 1;
+  }
+
+  .sdtestBg2 {
+    height: 100%;
+    width: 90%;
+    background: #fff;
+    position: absolute;
+    bottom: -22px;
+    left: 5%;
+    border-radius: 20px;
+    box-shadow: 0px 18px 52.8537px rgb(215 228 249 / 50%);
+    z-index: 2;
+  }
+
+  .sd_scroll {
+    height: auto;
+    max-height: 180px;
+    overflow: auto;
+  }
+
+  .slideshow {
+    position: relative;
+    min-height: 300px;
+    height: auto;
+    background: #fff;
+    box-shadow: 0px 18px 52.8537px rgba(215, 228, 249, 0.5);
+    border-radius: 20px;
+    background-image: url(https://farsighttechnologies.com/wp-content/uploads/2021/03/quote1.png), url(https://farsighttechnologies.com/wp-content/uploads/2021/03/quote.png);
+    background-position: top 15px left 15px, bottom 40% right 15px;
+    background-repeat: no-repeat;
+    background-size: 180px, 180px;
+    z-index: 3;
+  }
+
+  button.slick-prev.slick-arrow {
+    position: absolute;
+    z-index: 9999;
+    bottom: -80px;
+    right: 160px;
+    background: transparent;
+    color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    height: 15px;
+    width: 30px;
+    padding: 0;
+    background-image: url(https://farsighttechnologies.com/wp-content/uploads/2021/03/left-icon.png);
+    background-size: 100% 100%;
+  }
+
+  button.slick-next.slick-arrow {
+    position: absolute;
+    bottom: -82px;
+    right: 105px;
+    background: transparent;
+    color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    height: 18px;
+    width: 40px;
+    background-image: url(https://farsighttechnologies.com/wp-content/uploads/2021/03/right-icon.png);
+    background-size: 100% 100%;
+  }
+
+  .pagingInfo {
+    position: absolute;
+    bottom: 0;
+    z-index: 999;
+  }
+
+  .sdCustomSliderHeadig {
+    color: #94A2B3;
+    font-family: "Poppins", Sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.6em;
+    text-align: center;
+  }
+
+  .sdCustomSliderBtn {
+    display: inline-block;
+    text-decoration: none;
+    font-family: montserrat;
+    background: #E31C3A;
+    color: #fff;
+    padding: 12px 25px;
+    margin-top: 30px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .sdAllContent {
+    width: 75%;
+    margin: auto;
+  }
+
+  .thumbnail img {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    margin: auto;
+    margin-top: 15px;
+  }
+
+  .content {
+    display: block !important;
+    padding: 5px;
+  }
+
+  .SdClientName {
+    text-align: center;
+    color: #272D4E;
+    font-family: "Poppins", Sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.4em;
+    margin-top: 15px;
+  }
+
+  .SdClientDesc {
+    text-align: center;
+    color: #7854F7;
+    font-family: "Poppins", Sans-serif;
+    font-size: 14px;
+    line-height: 1.4em;
+    margin-bottom: 10px;
+  }
+
+
+  /* style for moblile */
+  @media (max-width:576px) {
+    .sd_scroll {
+      height: auto;
+      overflow: auto;
+      max-height: 240px;
+    }
+
+    .thumbnail,
+    .btnNtxt {
+      width: 100% !important;
+      display: block !important;
+    }
+
+  }
+
+  /* scroll bar */
+  /* total width */
+  .sd_scroll::-webkit-scrollbar {
+    background-color: transparent;
+    width: 6px;
+  }
+
+  /* background of the scrollbar except button or resizer */
+  .sd_scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  .sd_scroll::-webkit-scrollbar-track:hover {
+    background-color: transparent;
+  }
+
+  /* scrollbar itself */
+  .sd_scroll::-webkit-scrollbar-thumb {
+    background-color: #babac0;
+    border-radius: 16px;
+
+  }
+
+  .sd_scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a5;
+  }
+
+
+  .multitab-form-area {
+    max-width: 1500px;
+    margin: 0 auto;
+    background: rgb(247, 247, 247);
+    padding: 50px;
+    font-size: 24px;
+  }
+
+  .tab-links-area {
+    width: 240px;
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 20px;
+  }
+
+  .tab-form-area {
+    width: calc(100% - 405px);
+    display: inline-block;
+    background: #fff;
+    vertical-align: top;
+    padding: 16px;
+    border-radius: 5px;
+  }
+
+  .tab-links-area p {
+    margin: 0;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+  }
+
+  .tab-links-area h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+
+  .tab-part h4 {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .multitab-form-area hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+
+  }
+
+  .tab-links-area ul li a {
+    text-decoration: none;
+    font-size: 14px;
+    padding: 10px 15px;
+    display: block;
+    color: #333;
+    position: relative;
+  }
+
+  .tab-links-area ul li a:before {
+    content: "";
+    height: 0%;
+    width: 3px;
+
+    position: absolute;
+    left: -2px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    transition: 0.3s ease;
+  }
+
+  .tab-links-area ul li a.active:before {
+    height: 100%;
+    border-left: 3px solid rgb(195, 35, 35);
+
+  }
+
+  .tab-links-area ul li {
+    display: block;
+    border-left: 1px solid rgb(195, 35, 35);
+  }
+
+  .tab-links-area ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+  }
+
+  .form-field input,
+  .form-field select {
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    height: 35px;
+    padding-left: 10px;
+    border: 1px solid #ccc;
+  }
+
+  .form-field select {
+    padding: 0 0 0 2px;
+  }
+
+  .form-field label {
+    font-size: 14px;
+    display: block;
+    padding: 10px 0;
+  }
+
+  .half-2 {
+    width: 50%;
+    padding: 0 10px;
+    float: left;
+  }
+
+  .devider-row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .devider-row {
+    margin: 0 -10px;
+    clear: both;
+  }
+
+  .half-3 {
+    width: calc(100% / 3);
+    float: left;
+    padding: 0 10px;
+  }
+
+  .next-btn button,
+  .next-btn a {
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+    color: #fff;
+    height: 35px;
+    width: 90px;
+    border-radius: 100px;
+    margin: 20px 0 10px auto;
+    display: block;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 35px;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  .next-btn button:hover,
+  .next-btn a:hover {
+    background: transparent;
+
+  }
+
+  .tabs-panels.active {
+    display: block;
+  }
+
+  .tabs-panels {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .full {
+    padding: 0 10px;
+    width: 100%;
+  }
+
+  .form-field textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    font-family: "Roboto", sans-serif;
+  }
+
+  .checkbox label:after {
+    content: "";
+    position: absolute;
+    border-style: solid;
+    border-color: #333;
+    height: 8px;
+    width: 5px;
+    border-width: 0 3px 3px 0;
+    left: 5px;
+    z-index: 2;
+    transform: rotate(35deg);
+    top: 4px;
+    display: none;
+  }
+
+  .checkbox label:before {
+    content: "";
+    height: 20px;
+    width: 21px;
+    background: #fff;
+    position: absolute;
+
+    left: -2px;
+    top: 0;
+    border-radius: 3px;
+  }
+
+  .checkbox {
+    position: relative;
+    margin: 10px 0;
+  }
+
+  .checkbox label {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+  }
+
+  .checkbox input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+  }
+
+  .radio label:after {
+    content: "";
+    display: none;
+    height: 15px;
+    width: 15px;
+    position: absolute;
+
+    border-radius: 100px;
+    left: 2px;
+    top: 2px;
+    z-index: 1;
+  }
+
+  .radio label:before {
+    content: "";
+    height: 21px;
+    width: 21px;
+    background: #fff;
+
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    border-radius: 100px;
+  }
+
+  .radio input[type="radio"] {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    margin: 0;
+    position: relative;
+    z-index: 3;
+    opacity: 0;
+    vertical-align: middle;
+  }
+
+  .radio label {
+    padding: 0;
+    display: inline-block;
+    margin: 0;
+    vertical-align: middle;
+  }
+
+  .radio {
+    position: relative;
+    margin: 10px 0;
+  }
+
+  .radio input:checked+label:after,
+  .checkbox input:checked+label:after {
+    display: block;
+  }
+
+  .note p {
+    margin: 0;
+    font-size: 12px;
+    color: #999;
+  }
+
+  .form-footer p {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .form-footer {
+    padding: 20px;
+    text-align: center;
+    color: #676767;
+  }
+
+  .form-header {
+    background: #fff;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+
+  .logo-area {
+    padding: 0 10%;
+  }
+
+  .logo-area h1 a {
+    color: #000;
+    text-decoration: none;
+    outline: none;
+  }
+
+  .logo-area h1 {
+    margin: 0;
+    font-size: 18px;
+  }
+
+  .need-help a i {
+    background: #333;
+    color: #fff;
+    font-style: normal;
+    font-size: 10px;
+    height: 13px;
+    width: 13px;
+    display: inline-block;
+    text-align: center;
+    border-radius: 100px;
+  }
+
+  .need-help a {
+    font-size: 12px;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .need-help {
+    text-align: right;
+    padding: 0 10%;
+  }
+
+  .top-header {
+    padding: 15px 0;
+    border-bottom: 2px dashed #ccc;
+  }
+
+  .status p {
+    font-size: 12px;
+    color: #676767;
+  }
+
+  .status h5,
+  .status p {
+    margin: 0;
+  }
+
+  .bars label {
+    text-align: center;
+    display: block;
+    font-size: 14px;
+  }
+
+  .bars {
+    position: relative;
+  }
+
+  .blank-bar {
+    width: 100%;
+    background: #ccc;
+    height: 3px;
+    border-radius: 100px;
+  }
+
+  .full-bar {
+    width: 50%;
+
+    height: 3px;
+    position: relative;
+    bottom: -3px;
+  }
+
+  .bars span {
+    height: 8px;
+    width: 8px;
+    display: inline-block;
+    position: absolute;
+    background: rgb(214, 30, 30);
+    border-radius: 100px;
+    z-index: 1;
+  }
+
+  .bars span:nth-of-type(2) {
+    left: 15%;
+  }
+
+  .bars span:nth-of-type(3) {
+    left: 50%;
+  }
+
+  .bars span:nth-of-type(4) {
+    left: 85%;
+  }
+
+  .bars span:nth-of-type(5) {
+    left: 100%;
+  }
+
+  .bottom-header {
+    padding: 15px 10%;
+  }
+
+  .status {
+    padding-left: 10%;
+  }
+
+  /*keyframes*/
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .fadeIn {
+    -webkit-animation-name: fadeIn;
+    animation-name: fadeIn;
+  }
+
+  @media (max-width: 750px) {
+    .half-2 {
+      width: 100%;
+    }
+
+    .top-header .half-2 {
+      width: 50%;
+    }
+
+    .logo-area {
+      padding: 0 5%;
+      text-align: left;
+    }
+
+    .status {
+      padding-top: 20px;
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 570px) {
+    .tab-links-area {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    .tab-form-area {
+      width: 100%;
+    }
+
+    .bottom-header {
+      padding: 15px 5%;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .form-area {
+      max-width: 90%;
+    }
+  }
+</style>
+
+
+
+<script>
+  $('a[data-toggle="formtab"]').click(function () {
+    var targetId = $(this).attr('href');
+
+    $('.tabs-panels').removeClass('active')
+    $('a[data-toggle="formtab"]').removeClass('active');
+
+    $(targetId).addClass('active');
+    $('a[href="' + targetId + '"]').addClass('active')
+
+
+
+  });
+</script>
+
+
+
+<script>
+  window.$('#table_id').DataTable();
+
+  var isa_dict = JSON.parse('{{isa_id_dict|escapejs}}')
+  var course_id_dict = JSON.parse('{{course_id_dict|escapejs}}')
+  var element = document.getElementById('course_id')
+
+  var form_element = document.getElementById('form')
+  var spinner = document.getElementById('spinner')
+
+
+
+  var course_id = null 
+  {% if course_id %}
+  course_id = "{{course_id}}" 
+  {% endif %}
+
+
+  document.getElementById("form").addEventListener("submit", function (event) {
+    event.preventDefault()
+
+    spinner.style.display = ''
+
+    setTimeout(() => {
+      spinner.style.display = 'none'
+      form_element.submit()
+    }, 1500);
+
+  });
+
+
+  populateCourses()
+
+
+
+
+  function populateCourses() {
+
+
+
+
+    var courses = []
+    var isa_id = document.getElementById('isa_id')
+    console.log(isa_id.value)
+
+    if (isa_id.value == 'Choose') {
+      $("#course_id").empty();
+      var option = document.createElement("option");
+
+      option.text = 'All';
+      option.value = -1
+      element.add(option);
+      document.getElementById('show_count_course').innerText = ''
+      return;
+    }
+
+    var courses_available = isa_dict[`${isa_id.value}`].AvailableCourses
+
+
+    for (var i = 0; i < courses_available.length; i++) {
+
+      var course = course_id_dict[courses_available[i]]
+
+      courses.push({
+        'CourseName': course.CourseName,
+        'CourseId': courses_available[i]
+      })
+    }
+
+    $("#course_id").empty();
+    var option = document.createElement("option");
+
+    option.text = 'All';
+    option.value = -1
+    element.add(option);
+
+    for (var i = 0; i < courses.length; i++) {
+      var option = document.createElement("option");
+      console.log(course_id)
+      option.text = courses[i].CourseName;
+      option.value = courses[i].CourseId
+      if (course_id == courses[i].CourseId) {
+        option.setAttribute('selected', true);
+      }
+      element.add(option);
+    }
+
+    document.getElementById('show_count_course').innerText = `- (Available courses ${courses.length})`
+
+    console.log(courses)
+  }
+
+  function showCustomDateFilter() {
+    var filter_days = document.getElementById('filter_days')
+    var custom_date_filter = document.getElementById('custom_date_filter')
+    if (filter_days.value == 'custom_date') {
+      custom_date_filter.style.display = ''
+    } else {
+      custom_date_filter.style.display = 'none'
+    }
+  }
+
+
+  function scrollBottom(){
+    $("html, body").animate({
+                    scrollTop: innerHeight,
+                },
+                "slow"
+            );
+  }
+
+ 
+
+</script>
+
+
+
+{% endblock %}

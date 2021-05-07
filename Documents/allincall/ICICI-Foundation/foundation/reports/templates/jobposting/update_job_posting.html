@@ -1,0 +1,132 @@
+{% extends "console/base.html" %}
+{% block content %}
+<main class="content">
+
+  <div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+      <div class="col-auto d-none d-sm-block">
+        <h3><strong> Update Internal Job Postings </strong></h3>
+      </div>
+      
+      
+            <div class="row">
+                <div class="col-12 col-lg-12 col-xxl-12 d-flex">
+                    <div class="card flex-fill">
+                        <div class="card-header mb-3">
+                          <form method="post">
+                            {% csrf_token %}
+                         
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <label>Enter Job Position </label>
+                                  <input class="form-control" value="{{job_posting_obj.position}}" id="job_position" type="text">
+                                </div>
+                      
+                                <div class="col-md-12">
+                                  <label>Enter Job Location </label>
+                                  <input class="form-control"  value="{{job_posting_obj.location}}" id="job_location" type="text">
+                                </div>
+                      
+                                <div class="col-md-12">
+                                 
+                                  {{form.media}}
+                                  {{form.as_p}}
+
+                                </div>
+                              </div>
+
+         <button type="submit"  class="btn btn-primary mt-4">Update</button>
+
+                      
+                      </form>
+
+                       
+                    </div>
+                </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+
+<style>
+    #table_id_wrapper{
+        margin:10px;
+    }
+</style>
+
+
+<!-- Modal -->
+<div class="modal fade" id="CreateJob" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Job Posting</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <label>Enter Job Position </label>
+            <input class="form-control"  id="job_position" type="text">
+          </div>
+
+          <div class="col-md-12">
+            <label>Enter Job Location </label>
+            <input class="form-control"  id="job_location" type="text">
+          </div>
+
+          <div class="col-md-12">
+           
+            {{form.media}}
+            {{form.as_p}}
+
+           <!-- <textarea class="form-control" id="job_description"></textarea> -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" onclick="createJobPosting()" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="ImpactUpload" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Upload Job Posting Excel</label>
+                <input class="form-control" type="file" id="fileupload">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button"  onclick="uploadJobPostingExcel()" class="btn btn-primary">Upload</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock %}
